@@ -321,6 +321,7 @@ class DisplayItemsScene(MesaScene):
         self.container.build()
 
     def update(self):
+        self.title.set_text("Renteck " + self.previous_scene)
         for event in self.get_events():
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_p:

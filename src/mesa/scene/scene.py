@@ -10,6 +10,7 @@ class MesaScene:
         self.core: MesaCore = core
         self.name = scene_name
         self.previous_scene = None
+        self.can_go_back = False
         self.position = pg.Vector2([0, 0])
         self.manager: MesaSceneManager = manager
         self.manager.add_scene(self)

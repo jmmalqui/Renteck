@@ -68,10 +68,10 @@ class _MesaContainer:
 
     def move_to_previous_scene(self):
         if self.scene.previous_scene:
-            self.manager.go_to(self.scene.previous_scene)
+            self.manager.go_to(self.scene.previous_scene, False)
 
-    def move_to_screen(self, scene_name):
-        self.manager.go_to(scene_name)
+    def move_to_screen(self, scene_name, can_go_back=True):
+        self.manager.go_to(scene_name, can_go_back)
 
     def get_real_height(self):
         return self.height + 2 * self.marginy

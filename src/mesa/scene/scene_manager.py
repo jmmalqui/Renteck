@@ -44,10 +44,12 @@ class MesaSceneManager:
         if previous != None:
             self.go_to(previous)
 
-    def go_to(self, scene_name):
+    def go_to(self, scene_name, can_go_back=True):
         previous_scene = self.current_scene_name
+
         self.current_scene_name = scene_name
-        self.scenes[self.current_scene_name].previous_scene = previous_scene
+        if can_go_back:
+            self.scenes[self.current_scene_name].previous_scene = previous_scene
 
     def resize_current_surface(self):
         if self.current_scene != MesaCoreFlag.NOT_DECLARED_ON_INIT:

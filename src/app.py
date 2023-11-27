@@ -6,6 +6,7 @@ from scenes.display_item.display_items_scene import DisplayItemsScene
 from scenes.item_descriptor.item_descriptor_scene import ItemDescriptorScene
 from scenes.registration.new_registration import NewRegistrationScene
 from scenes.registration.registration_success import RegistrationSuccessScene
+from scenes.rental.period import RentalPeriodScene
 
 
 class Renteck(mesa.MesaCore):
@@ -26,4 +27,5 @@ class Renteck(mesa.MesaCore):
         self.item_descriptor = ItemDescriptorScene(
             self, "item-descriptor", self.scene_manager
         )
-        self.scene_manager.set_init_scene("entry")
+        self.rental_period = RentalPeriodScene(self, "rental-set", self.scene_manager)
+        self.scene_manager.set_init_scene("rental-set")
