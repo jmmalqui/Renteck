@@ -2,6 +2,8 @@ from mesa.core import *
 from typing import Dict, Union
 from mesa.flag import *
 import pygame as pg
+from mesa.animation import DynamicObject, Animation
+from mesa.animation.easing import *
 
 
 class MesaSceneManager:
@@ -15,6 +17,16 @@ class MesaSceneManager:
             MesaScene, MesaCoreFlag
         ] = MesaCoreFlag.NOT_DECLARED_ON_INIT
         self.events = []
+        self.animation = Animation()
+        self.timer = 0
+        self.fade_time = 200
+        self.begin_fade = False
+        self.late_init = True
+        self.fade_surf = None
+        self.fade_level = DynamicObject(self.animation, 0)
+
+    def set_fade_time(self, time):
+        self.fade_time = time
 
     def set_init_scene(self, scene_name):
         self.current_scene_name = scene_name
@@ -46,10 +58,19 @@ class MesaSceneManager:
 
     def go_to(self, scene_name, can_go_back=True):
         previous_scene = self.current_scene_name
-
         self.current_scene_name = scene_name
         if can_go_back:
             self.scenes[self.current_scene_name].previous_scene = previous_scene
+        self.begin_fade = True
+        self.fade_level.pulse(
+            0,
+            150,
+            0,
+            0,
+            self.fade_time,
+            ease_in_out_back,
+            ease_out_back,
+        )
 
     def resize_current_surface(self):
         if self.current_scene != MesaCoreFlag.NOT_DECLARED_ON_INIT:
@@ -60,8 +81,21 @@ class MesaSceneManager:
             self.current_scene.container._on_resize()
 
     def update(self):
+        self.animation.update()
+        if self.late_init:
+            self.fade_surf = pg.Surface(pg.display.get_window_size(), pg.SRCALPHA)
+            self.fade_surf.fill("white")
+            self.fade_surf.set_alpha(self.fade_level.get_value())
+            self.late_init = False
+        self.fade_surf.set_alpha(self.fade_level.get_value())
         self.update_scene_ids()
+        if self.begin_fade:
+            self.timer += 1
+        if self.timer == self.fade_time:
+            self.begin_fade = False
+            self.timer = 0
         self.current_scene.__coreupdate__()
 
     def render(self):
         self.current_scene.__corerender__()
+        self.core.display.blit(self.fade_surf, [0, 0])

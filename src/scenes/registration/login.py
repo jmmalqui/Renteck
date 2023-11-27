@@ -10,7 +10,6 @@ class LoginScene(MesaScene):
         self.set_background_color("#E6E6E6")
         self.container = MesaStackVertical(self)
         self.title1 = Title1(self.container, "ログイン")  # 上部ラベル
-        self.MyButton1 = GoBackButton(self.title1, "＜", "black", "white")
         self.title2 = RenteckTitle(self.container, "Renteck")  # RRenteck
         self.text1 = CredentialsTextPlaceholder(self.container, "メールアドレス", 30)
         self.input1 = CredentialsInputBox(self.container)

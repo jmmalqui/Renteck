@@ -217,7 +217,7 @@ class kakuninButton(MesaButtonText):
         self.set_signal(self.show_press)
 
     def show_press(self):
-        self.move_to_screen("entry", False)
+        self.move_to_screen("rental-success", False)
 
 
 class namisenImage(MesaImage):
