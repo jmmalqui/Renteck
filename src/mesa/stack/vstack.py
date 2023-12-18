@@ -13,6 +13,7 @@ class MesaStackVertical(_MesaContainer):
 
         if self._is_container_hovered():
             if pg.mouse.get_pressed(3)[0]:
+                print(self.elements)
                 items_total_height = sum(
                     [element.get_real_height() for element in self.elements]
                 )
