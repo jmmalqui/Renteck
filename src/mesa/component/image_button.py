@@ -1,6 +1,7 @@
 from mesa.component.image import MesaImage
 from mesa.flag.core_flag import MesaCoreFlag
 import pygame as pg
+from plyer import vibrator
 
 
 class MesaImageButton(MesaImage):
@@ -38,8 +39,7 @@ class MesaImageButton(MesaImage):
                 ):
                     if self.signal != MesaCoreFlag.NOT_DECLARED_ON_INIT:
                         self.callback_result = self.signal()
-                    else:
-                        print(f"[DEBUG] No callback has been asigned to {self}")
+                        vibrator.vibrate(0.05)
 
     def inherit_update(self):
         self.handle_events()

@@ -1,6 +1,11 @@
+from const import SceneTitles
 from mesa import *
 import pygame as pg
+from mesa.info_tag.tag import InfoTagLevels
 from utils.goback_button import GoBackButton
+from email.utils import parseaddr
+import re
+from plyer import vibrator
 
 
 class NewRegistrationScene(MesaScene):
@@ -14,8 +19,23 @@ class NewRegistrationScene(MesaScene):
         self.text2 = CustomText2(self.container, "メールアドレス", 30)
         self.input1 = MyInputBox1(self.container)
         self.MyButton2 = ConfirmLoginButton(self.container, "会員登録する", "white", "black")
+        self.MyButton2.set_signal(self.move)
         self.container.set_as_core()
         self.container.build()
+
+    def move(self):
+        if not re.match(
+            """(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])""",
+            self.input1.get_written_text(),
+        ):
+            self.core.info_tag.inform("適切なメールアドレスを入力してください", InfoTagLevels.CRITICAL)
+            self.text1.set_text_color([255, 0, 0])
+            self.text1.set_bold()
+            if self.core.ANDROID:
+                vibrator.vibrate(0.1)
+        else:
+            self.core.eventsys.emit("EMAILREGISTERED", self.input1.get_written_text())
+            self.manager.go_to(SceneTitles.SceneRegistrationSuccesful, False)
 
 
 # ラベル（上部）
@@ -133,7 +153,3 @@ class ConfirmLoginButton(MesaButtonText):
         self.set_background_color(bgcolor)
         self.center_text()
         self.parent.add_element(self)
-        self.set_signal(self.show_press)
-
-    def show_press(self):
-        self.move_to_screen("reg-success")

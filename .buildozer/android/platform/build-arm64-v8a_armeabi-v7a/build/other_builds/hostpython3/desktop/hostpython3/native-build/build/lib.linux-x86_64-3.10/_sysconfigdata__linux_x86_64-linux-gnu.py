@@ -41,12 +41,12 @@ build_time_vars = {'ABIFLAGS': '',
  'CONFINCLUDEDIR': '/usr/local/include',
  'CONFINCLUDEPY': '/usr/local/include/python3.10',
  'COREPYTHONPATH': '',
- 'COVERAGE_INFO': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/native-build/coverage.info',
- 'COVERAGE_REPORT': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/native-build/lcov-report',
+ 'COVERAGE_INFO': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/native-build/coverage.info',
+ 'COVERAGE_REPORT': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/native-build/lcov-report',
  'COVERAGE_REPORT_OPTIONS': '--no-branch-coverage --title "CPython lcov '
                             'report"',
  'CPPFLAGS': '-IObjects -IInclude -IPython -I. '
-             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include',
+             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include',
  'CXX': 'g++',
  'DESTDIRS': '/usr/local /usr/local/lib /usr/local/lib/python3.10 '
              '/usr/local/lib/python3.10/lib-dynload',
@@ -572,7 +572,7 @@ build_time_vars = {'ABIFLAGS': '',
  'MAINCC': 'gcc',
  'MAJOR_IN_MKDEV': 0,
  'MAJOR_IN_SYSMACROS': 1,
- 'MAKESETUP': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Modules/makesetup',
+ 'MAKESETUP': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Modules/makesetup',
  'MANDIR': '/usr/local/share/man',
  'MKDIR_P': '/usr/bin/mkdir -p',
  'MODBUILT_NAMES': 'posix  errno  pwd  _sre  _codecs  _weakref  _functools  '
@@ -643,28 +643,28 @@ build_time_vars = {'ABIFLAGS': '',
                              '-Wno-missing-field-initializers '
                              '-Werror=implicit-function-declaration '
                              '-fvisibility=hidden  '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include/internal '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include/internal '
                              '-IObjects -IInclude -IPython -I. '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include '
                              '-DPy_BUILD_CORE_BUILTIN',
  'PY_CFLAGS': '-Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 -Wall',
  'PY_CFLAGS_NODIST': '-std=c99 -Wextra -Wno-unused-result '
                      '-Wno-unused-parameter -Wno-missing-field-initializers '
                      '-Werror=implicit-function-declaration '
                      '-fvisibility=hidden  '
-                     '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include/internal',
+                     '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include/internal',
  'PY_COERCE_C_LOCALE': 1,
  'PY_CORE_CFLAGS': '-Wno-unused-result -Wsign-compare -DNDEBUG -g -fwrapv -O3 '
                    '-Wall -std=c99 -Wextra -Wno-unused-result '
                    '-Wno-unused-parameter -Wno-missing-field-initializers '
                    '-Werror=implicit-function-declaration -fvisibility=hidden  '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include/internal '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include/internal '
                    '-IObjects -IInclude -IPython -I. '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include '
                    '-DPy_BUILD_CORE',
  'PY_CORE_LDFLAGS': '',
  'PY_CPPFLAGS': '-IObjects -IInclude -IPython -I. '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include',
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include',
  'PY_ENABLE_SHARED': 0,
  'PY_FORMAT_SIZE_T': '"z"',
  'PY_LDFLAGS': '',
@@ -676,9 +676,9 @@ build_time_vars = {'ABIFLAGS': '',
                         '-Wno-unused-parameter -Wno-missing-field-initializers '
                         '-Werror=implicit-function-declaration '
                         '-fvisibility=hidden  '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include/internal '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include/internal '
                         '-IObjects -IInclude -IPython -I. '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include',
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Include',
  'Py_DEBUG': 0,
  'Py_ENABLE_SHARED': 0,
  'Py_HASH_ALGORITHM': 0,
@@ -716,7 +716,7 @@ build_time_vars = {'ABIFLAGS': '',
  'SIZEOF__BOOL': 1,
  'SOABI': 'cpython-310-x86_64-linux-gnu',
  'SRCDIRS': 'Parser Objects Python Modules Modules/_io Programs',
- 'SRC_GDB_HOOKS': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Tools/gdb/libpython.py',
+ 'SRC_GDB_HOOKS': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Tools/gdb/libpython.py',
  'STATIC_LIBPYTHON': 1,
  'STDC_HEADERS': 1,
  'STRICT_SYSV_CURSES': "/* Don't use ncurses extensions */",
@@ -732,7 +732,7 @@ build_time_vars = {'ABIFLAGS': '',
  'TESTPYTHON': './python',
  'TESTPYTHONOPTS': '',
  'TESTRUNNER': './python '
-               '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Tools/scripts/run_tests.py',
+               '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Tools/scripts/run_tests.py',
  'TESTSUBDIRS': 'ctypes/test \\',
  'TESTTIMEOUT': 1200,
  'TEST_MODULES': 'yes',
@@ -743,10 +743,10 @@ build_time_vars = {'ABIFLAGS': '',
  'TZPATH': '/usr/share/zoneinfo:/usr/lib/zoneinfo:/usr/share/lib/zoneinfo:/etc/zoneinfo',
  'UNICODE_DEPS': '\\',
  'UNIVERSALSDK': '',
- 'UPDATE_FILE': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Tools/scripts/update_file.py',
+ 'UPDATE_FILE': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/Tools/scripts/update_file.py',
  'USE_COMPUTED_GOTOS': 0,
  'VERSION': '3.10',
- 'VPATH': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3',
+ 'VPATH': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3',
  'WHEEL_PKG_DIR': '',
  'WINDOW_HAS_FLAGS': 1,
  'WITH_DECIMAL_CONTEXTVAR': 1,
@@ -760,9 +760,9 @@ build_time_vars = {'ABIFLAGS': '',
  'WITH_VALGRIND': 0,
  'X87_DOUBLE_ROUNDING': 0,
  'XMLLIBSUBDIRS': 'xml xml/dom xml/etree xml/parsers xml/sax',
- 'abs_builddir': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/native-build',
- 'abs_srcdir': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3',
+ 'abs_builddir': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3/native-build',
+ 'abs_srcdir': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3',
  'datarootdir': '/usr/local/share',
  'exec_prefix': '/usr/local',
  'prefix': '/usr/local',
- 'srcdir': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3'}
+ 'srcdir': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/hostpython3/desktop/hostpython3'}

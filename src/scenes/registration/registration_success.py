@@ -1,13 +1,10 @@
+from const import SceneTitles
 from mesa import *
 import pygame as pg
 
-sentence1 = (
-    "※まだ会員登録は完了してません。\n\n"
-    "ご登録いただいたメールアドレス宛に、本登録を行うためのメールをお送りいたしました。"
-    "メール本文に記載されているURLから会員登録を完了させてください。\n\n"
-    "※本登録手続きメールが届かない場合、入力したメールアドレスが間違っている可能性があります。"
-    "再度、最初から新規会員登録を行ってください"
-)
+from mesa.info_tag.tag import InfoTagLevels
+
+sentence1 = "※まだ会員登録は完了してません。\nご登録いただいたメールアドレス宛に、本登録を行うためのメールをお送りいたしました。メール本文に記載されているURLから会員登録を完了させてください。\n※本登録手続きメールが届かない場合、入力したメールアドレスが間違っている可能性があります。再度、最初から新規会員登録を行ってください"
 
 
 class RegistrationSuccessScene(MesaScene):
@@ -121,8 +118,23 @@ class AuthCode(MesaStackVertical):
         self.text1 = CustomText2(self, "認証コードを入力してください", 30)
         self.input = MyInputBox1(self)
         self.MyButton1 = GoToTopPage(self, "本登録へ進む", "white", "black")
+        self.MyButton1.set_signal(self.check_code)
         self.set_margin(0, 15)
         self.parent.add_element(self)
+        self.times = 0
+
+    def check_code(self):
+        self.times += 1
+        if self.times == 3:
+            self.core.info_tag.inform("認証コードは１２３４")
+        if self.input.get_written_text() != "1234":
+            self.text1.set_text("もう一度認証コードを入力してください")
+            self.text1.set_text_color("red")
+        else:
+            self.move_to_screen(SceneTitles.SceneRealRegistration, False)
+        if not self.input.get_written_text().isnumeric():
+            self.core.info_tag.inform("数字の４桁の認証コードを入力してください", InfoTagLevels.CRITICAL)
+            self.text1.set_text_color("red")
 
 
 class GoToTopPage(MesaButtonText):
@@ -139,7 +151,3 @@ class GoToTopPage(MesaButtonText):
         self.set_background_color(bgcolor)
         self.center_text()
         self.parent.add_element(self)
-        self.set_signal(self.show_press)
-
-    def show_press(self):
-        self.move_to_screen("real-reg", False)

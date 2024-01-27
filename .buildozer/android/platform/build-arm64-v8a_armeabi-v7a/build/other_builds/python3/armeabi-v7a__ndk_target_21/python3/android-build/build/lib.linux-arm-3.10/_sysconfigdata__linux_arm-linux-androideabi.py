@@ -20,16 +20,16 @@ build_time_vars = {'ABIFLAGS': '',
               '-target armv7a-linux-androideabi21 -fomit-frame-pointer '
               '-march=armv7-a -mfloat-abi=softfp -mfpu=vfp -mthumb -fPIC '
               '-pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions '
-              '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
-              '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
-              '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
-              '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1 '
+              '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
+              '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
+              '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
+              '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w '
               '-L/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21 '
               '-march=armv7-a -Wl,--fix-cortex-a8   '
-              '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
-              '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
-              '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
-              '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1 '
+              '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
+              '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
+              '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
+              '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w '
               '-L/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21',
  'BUILDEXE': '',
  'BUILDPYTHON': 'python',
@@ -54,17 +54,17 @@ build_time_vars = {'ABIFLAGS': '',
                             '-fvisibility=hidden',
  'CONFIGURE_CPPFLAGS': '-DANDROID '
                        '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
-                       '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
-                       '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
-                       '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
-                       '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include '
-                       '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/internal '
-                       '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/openssl '
+                       '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
+                       '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
+                       '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
+                       '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include '
+                       '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/internal '
+                       '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/openssl '
                        '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include',
- 'CONFIGURE_LDFLAGS': '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
-                      '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
-                      '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
-                      '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1 '
+ 'CONFIGURE_LDFLAGS': '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
+                      '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
+                      '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
+                      '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w '
                       '-L/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21 '
                       '-march=armv7-a -Wl,--fix-cortex-a8',
  'CONFIGURE_LDFLAGS_NODIST': '',
@@ -75,54 +75,53 @@ build_time_vars = {'ABIFLAGS': '',
                 "'ac_cv_header_sys_eventfd_h=no' '--prefix=/usr/local' "
                 "'--exec-prefix=/usr/local' "
                 "'--enable-loadable-sqlite-extensions' "
-                "'--with-openssl=/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/arm64-v8a__ndk_target_21/openssl1.1' "
-                "'--with-openssl=/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1' "
+                "'--with-openssl=/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w' "
                 "'build_alias=x86_64-pc-linux-gnu' "
                 "'host_alias=arm-linux-androideabi' "
                 "'CC=/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi21-clang' "
                 "'CFLAGS=-fPIC -DANDROID' 'LDFLAGS=  "
-                '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
-                '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
-                '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
-                '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1 '
+                '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
+                '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
+                '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
+                '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w '
                 "-L/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21' "
                 "'LIBS= -lsqlite3 -lffi -lcrypto1.1 -lssl1.1 -lz' "
                 "'CPPFLAGS=-DANDROID "
                 '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/internal '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/openssl '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/internal '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/openssl '
                 "-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include' "
-                "'PKG_CONFIG_PATH=/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi'",
+                "'PKG_CONFIG_PATH=/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi'",
  'CONFINCLUDEDIR': '/usr/local/include',
  'CONFINCLUDEPY': '/usr/local/include/python3.10',
  'COREPYTHONPATH': '',
- 'COVERAGE_INFO': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/android-build/coverage.info',
- 'COVERAGE_REPORT': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/android-build/lcov-report',
+ 'COVERAGE_INFO': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/android-build/coverage.info',
+ 'COVERAGE_REPORT': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/android-build/lcov-report',
  'COVERAGE_REPORT_OPTIONS': '--no-branch-coverage --title "CPython lcov '
                             'report"',
  'CPPFLAGS': '-IObjects -IInclude -IPython -I. '
-             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include '
+             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include '
              '-DANDROID '
              '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
-             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
-             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
-             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
-             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include '
-             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/internal '
-             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/openssl '
+             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
+             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
+             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
+             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include '
+             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/internal '
+             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/openssl '
              '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
              '-DANDROID '
              '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
-             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
-             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
-             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
-             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include '
-             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/internal '
-             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/openssl '
+             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
+             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
+             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
+             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include '
+             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/internal '
+             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/openssl '
              '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include',
  'CXX': '/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ '
         '-target armv7a-linux-androideabi21 -fomit-frame-pointer '
@@ -616,16 +615,16 @@ build_time_vars = {'ABIFLAGS': '',
                 '-target armv7a-linux-androideabi21 -fomit-frame-pointer '
                 '-march=armv7-a -mfloat-abi=softfp -mfpu=vfp -mthumb -fPIC '
                 '-pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions',
- 'LDFLAGS': '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
-            '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
-            '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
-            '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1 '
+ 'LDFLAGS': '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
+            '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
+            '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
+            '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w '
             '-L/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21 '
             '-march=armv7-a -Wl,--fix-cortex-a8   '
-            '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
-            '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
-            '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
-            '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1 '
+            '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
+            '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
+            '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
+            '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w '
             '-L/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21',
  'LDFLAGS_NODIST': '',
  'LDLIBRARY': 'libpython3.10.so',
@@ -634,22 +633,22 @@ build_time_vars = {'ABIFLAGS': '',
              '-target armv7a-linux-androideabi21 -fomit-frame-pointer '
              '-march=armv7-a -mfloat-abi=softfp -mfpu=vfp -mthumb -fPIC '
              '-pthread -shared -Wl,-O1 -Wl,-Bsymbolic-functions '
-             '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
-             '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
-             '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
-             '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1 '
+             '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
+             '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
+             '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
+             '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w '
              '-L/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21 '
              '-march=armv7-a -Wl,--fix-cortex-a8   '
-             '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
-             '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
-             '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
-             '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1 '
+             '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
+             '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
+             '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
+             '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w '
              '-L/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21',
  'LDVERSION': '3.10',
  'LIBC': '',
  'LIBDEST': '/usr/local/lib/python3.10',
  'LIBDIR': '/usr/local/lib',
- 'LIBFFI_INCLUDEDIR': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include',
+ 'LIBFFI_INCLUDEDIR': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include',
  'LIBM': '-lm',
  'LIBOBJDIR': 'Python/',
  'LIBOBJS': '',
@@ -679,7 +678,7 @@ build_time_vars = {'ABIFLAGS': '',
  'MAINCC': '/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi21-clang',
  'MAJOR_IN_MKDEV': 0,
  'MAJOR_IN_SYSMACROS': 1,
- 'MAKESETUP': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Modules/makesetup',
+ 'MAKESETUP': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Modules/makesetup',
  'MANDIR': '/usr/local/share/man',
  'MKDIR_P': '/usr/bin/mkdir -p',
  'MODBUILT_NAMES': 'posix  errno  pwd  _sre  _codecs  _weakref  _functools  '
@@ -706,8 +705,8 @@ build_time_vars = {'ABIFLAGS': '',
  'MVWDELCH_IS_EXPRESSION': 0,
  'NO_AS_NEEDED': '-Wl,--no-as-needed',
  'OBJECT_OBJS': '\\',
- 'OPENSSL_INCLUDES': '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include',
- 'OPENSSL_LDFLAGS': '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/lib',
+ 'OPENSSL_INCLUDES': '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include',
+ 'OPENSSL_LDFLAGS': '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/lib',
  'OPENSSL_LIBS': '-lssl -lcrypto',
  'OPENSSL_RPATH': '',
  'OPT': '-DNDEBUG -g -fwrapv -O3 -Wall',
@@ -739,11 +738,11 @@ build_time_vars = {'ABIFLAGS': '',
  'PYTHONFRAMEWORKINSTALLDIR': '',
  'PYTHONFRAMEWORKPREFIX': '',
  'PYTHONPATH': '',
- 'PYTHON_FOR_BUILD': '_PYTHON_PROJECT_BASE=/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/android-build '
+ 'PYTHON_FOR_BUILD': '_PYTHON_PROJECT_BASE=/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/android-build '
                      '_PYTHON_HOST_PLATFORM=$(_PYTHON_HOST_PLATFORM) '
                      'PYTHONPATH=$(shell test -f pybuilddir.txt && echo '
-                     '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/android-build/`cat '
-                     'pybuilddir.txt`:)/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Lib '
+                     '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/android-build/`cat '
+                     'pybuilddir.txt`:)/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Lib '
                      '_PYTHON_SYSCONFIGDATA_NAME=_sysconfigdata__linux_arm-linux-androideabi '
                      'python3.10',
  'PYTHON_FOR_REGEN': '',
@@ -759,26 +758,26 @@ build_time_vars = {'ABIFLAGS': '',
                              '-Wstrict-prototypes '
                              '-Werror=implicit-function-declaration '
                              '-fvisibility=hidden  '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include/internal '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include/internal '
                              '-IObjects -IInclude -IPython -I. '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include '
                              '-DANDROID '
                              '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/internal '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/openssl '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/internal '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/openssl '
                              '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
                              '-DANDROID '
                              '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/internal '
-                             '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/openssl '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/internal '
+                             '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/openssl '
                              '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
                              '-DPy_BUILD_CORE_BUILTIN',
  'PY_CFLAGS': '-mfloat-abi=softfp -mfpu=vfpv3-d16 -Wno-unused-result '
@@ -789,7 +788,7 @@ build_time_vars = {'ABIFLAGS': '',
                      '-Wstrict-prototypes '
                      '-Werror=implicit-function-declaration '
                      '-fvisibility=hidden  '
-                     '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include/internal',
+                     '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include/internal',
  'PY_COERCE_C_LOCALE': 1,
  'PY_CORE_CFLAGS': '-mfloat-abi=softfp -mfpu=vfpv3-d16 -Wno-unused-result '
                    '-Wsign-compare -Wunreachable-code -DNDEBUG -g -fwrapv -O3 '
@@ -797,71 +796,71 @@ build_time_vars = {'ABIFLAGS': '',
                    '-Wno-unused-result -Wno-unused-parameter '
                    '-Wno-missing-field-initializers -Wstrict-prototypes '
                    '-Werror=implicit-function-declaration -fvisibility=hidden  '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include/internal '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include/internal '
                    '-IObjects -IInclude -IPython -I. '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include '
                    '-DANDROID '
                    '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/internal '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/openssl '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/internal '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/openssl '
                    '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
                    '-DANDROID '
                    '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/internal '
-                   '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/openssl '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/internal '
+                   '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/openssl '
                    '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
                    '-DPy_BUILD_CORE',
- 'PY_CORE_LDFLAGS': '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
-                    '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
-                    '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
-                    '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1 '
+ 'PY_CORE_LDFLAGS': '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
+                    '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
+                    '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
+                    '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w '
                     '-L/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21 '
                     '-march=armv7-a -Wl,--fix-cortex-a8   '
-                    '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
-                    '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
-                    '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
-                    '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1 '
+                    '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
+                    '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
+                    '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
+                    '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w '
                     '-L/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21',
  'PY_CPPFLAGS': '-IObjects -IInclude -IPython -I. '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include '
                 '-DANDROID '
                 '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/internal '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/openssl '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/internal '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/openssl '
                 '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
                 '-DANDROID '
                 '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/internal '
-                '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/openssl '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/internal '
+                '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/openssl '
                 '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include',
  'PY_ENABLE_SHARED': 1,
  'PY_FORMAT_SIZE_T': '"z"',
- 'PY_LDFLAGS': '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
-               '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
-               '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
-               '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1 '
+ 'PY_LDFLAGS': '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
+               '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
+               '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
+               '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w '
                '-L/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21 '
                '-march=armv7-a -Wl,--fix-cortex-a8   '
-               '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
-               '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
-               '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
-               '-L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1 '
+               '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a '
+               '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3/obj/local/armeabi-v7a '
+               '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/.libs '
+               '-L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w '
                '-L/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib/arm-linux-androideabi/21',
  'PY_LDFLAGS_NODIST': '',
  'PY_SSL_DEFAULT_CIPHERS': 1,
@@ -873,26 +872,26 @@ build_time_vars = {'ABIFLAGS': '',
                         '-Wno-missing-field-initializers -Wstrict-prototypes '
                         '-Werror=implicit-function-declaration '
                         '-fvisibility=hidden  '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include/internal '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include/internal '
                         '-IObjects -IInclude -IPython -I. '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Include '
                         '-DANDROID '
                         '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/internal '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/openssl '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/internal '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/openssl '
                         '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
                         '-DANDROID '
                         '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/internal '
-                        '-I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1/include/openssl '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1 '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/sqlite3/armeabi-v7a__ndk_target_21/sqlite3 '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/libffi/armeabi-v7a__ndk_target_21/libffi/include '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/internal '
+                        '-I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/openssl/armeabi-v7a__ndk_target_21/openssl1.1.1w/include/openssl '
                         '-I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include',
  'Py_DEBUG': 0,
  'Py_ENABLE_SHARED': 1,
@@ -931,7 +930,7 @@ build_time_vars = {'ABIFLAGS': '',
  'SIZEOF__BOOL': 1,
  'SOABI': 'cpython-310',
  'SRCDIRS': 'Parser Objects Python Modules Modules/_io Programs',
- 'SRC_GDB_HOOKS': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Tools/gdb/libpython.py',
+ 'SRC_GDB_HOOKS': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Tools/gdb/libpython.py',
  'STATIC_LIBPYTHON': 1,
  'STDC_HEADERS': 1,
  'STRICT_SYSV_CURSES': "/* Don't use ncurses extensions */",
@@ -947,7 +946,7 @@ build_time_vars = {'ABIFLAGS': '',
  'TESTPYTHON': './python',
  'TESTPYTHONOPTS': '',
  'TESTRUNNER': './python '
-               '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Tools/scripts/run_tests.py',
+               '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Tools/scripts/run_tests.py',
  'TESTSUBDIRS': 'ctypes/test \\',
  'TESTTIMEOUT': 1200,
  'TEST_MODULES': 'yes',
@@ -958,10 +957,10 @@ build_time_vars = {'ABIFLAGS': '',
  'TZPATH': '/usr/share/zoneinfo:/usr/lib/zoneinfo:/usr/share/lib/zoneinfo:/etc/zoneinfo',
  'UNICODE_DEPS': '\\',
  'UNIVERSALSDK': '',
- 'UPDATE_FILE': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Tools/scripts/update_file.py',
+ 'UPDATE_FILE': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/Tools/scripts/update_file.py',
  'USE_COMPUTED_GOTOS': 0,
  'VERSION': '3.10',
- 'VPATH': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3',
+ 'VPATH': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3',
  'WHEEL_PKG_DIR': '',
  'WINDOW_HAS_FLAGS': 0,
  'WITH_DECIMAL_CONTEXTVAR': 1,
@@ -975,9 +974,9 @@ build_time_vars = {'ABIFLAGS': '',
  'WITH_VALGRIND': 0,
  'X87_DOUBLE_ROUNDING': 0,
  'XMLLIBSUBDIRS': 'xml xml/dom xml/etree xml/parsers xml/sax',
- 'abs_builddir': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/android-build',
- 'abs_srcdir': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3',
+ 'abs_builddir': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3/android-build',
+ 'abs_srcdir': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3',
  'datarootdir': '/usr/local/share',
  'exec_prefix': '/usr/local',
  'prefix': '/usr/local',
- 'srcdir': '/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3'}
+ 'srcdir': '/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/python3/armeabi-v7a__ndk_target_21/python3'}

@@ -1,3 +1,4 @@
+from const import SceneTitles
 from mesa import *
 import pygame as pg
 
@@ -86,7 +87,7 @@ class MyButton1(MesaButtonText):
         self.set_signal(self.show_press)
 
     def show_press(self):
-        self.move_to_screen("entry", False)
+        self.move_to_screen(SceneTitles.SceneRentalItemList, False)
 
 
 class box(MesaStackVertical):

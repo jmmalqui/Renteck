@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Renteck</string>
-    <string name="private_version">bcef6a59a5d6f00a10b7ae7686f7f0f4ea074870</string>
-    <string name="presplash_color">#000000</string>
+    <string name="private_version">826cad0e3a96d109e5d1d21998a4d4fa676210da</string>
+    <string name="presplash_color">#FFFFFF</string>
     <string name="urlScheme">kivy</string>
 </resources>

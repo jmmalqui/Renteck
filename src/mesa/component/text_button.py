@@ -1,6 +1,7 @@
 from mesa.component.textlabel import MesaTextLabel
 from mesa.flag.core_flag import MesaCoreFlag
 import pygame as pg
+from plyer import vibrator
 
 
 class MesaButtonText(MesaTextLabel):
@@ -17,11 +18,12 @@ class MesaButtonText(MesaTextLabel):
 
     def handle_events(self):
         for event in self.scene.manager.get_events():
-            if event.type == pg.MOUSEBUTTONDOWN and self._is_container_hovered():
+            if event.type == pg.MOUSEBUTTONDOWN and self.rect.collidepoint(event.pos):
                 if self.signal != MesaCoreFlag.NOT_DECLARED_ON_INIT:
                     self.callback_result = self.signal()
-                else:
-                    print(f"[DEBUG] No callback has been asigned to {self}")
+                    if self.core.ANDROID:
+                        vibrator.vibrate(0.05)
+                        self.core.hide_keyboard()
 
     def inherit_update(self):
         self.handle_events()

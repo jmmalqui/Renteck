@@ -1,6 +1,7 @@
 from mesa.core import MesaCore
 import pygame as pg
 from mesa.scene.scene_manager import MesaSceneManager
+from pygame import _sdl2 as SDL2
 
 
 class MesaScene:
@@ -8,6 +9,7 @@ class MesaScene:
         from mesa.container import _MesaContainer
 
         self.core: MesaCore = core
+        # self.renderer = self.core.renderer
         self.name = scene_name
         self.previous_scene = None
         self.can_go_back = False
@@ -48,17 +50,17 @@ class MesaScene:
         self.core.display.blit(self.surface, self.position)
 
     def fill_color(self):
+        # self.renderer.draw_color = self.background_color
+        # self.renderer.draw_rect(self.renderer.get_viewport())
         self.surface.fill(self.background_color)
 
     def render_container(self):
         self.container.__corerender__()
 
     def render_modals(self):
-        # modals here modals there
         ...
 
     def render(self):
-        # do your render stuff here  YES I KNOW DOCSTRINGS EXIST
         ...
 
     def __corerender__(self):

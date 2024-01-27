@@ -1,3 +1,4 @@
+import requests
 from mesa import *
 import pygame as pg
 
@@ -197,10 +198,6 @@ class kakuteiButton(MesaButtonText):
         self.center_vertical()
         self.set_margin(10, 0)
         self.parent.add_element(self)
-        self.set_signal(self.show_press)
-
-    def show_press(self):
-        self.move_to_screen("totalsuccess", False)
 
 
 class modoruButton(MesaButtonText):
@@ -246,6 +243,30 @@ class UserInfoConfirmationScene(MesaScene):
         self.text = textbox(self.container)
         self.box = informationbox(self.container)
         self.button = buttonbox(self.container)
+        self.button.button2.set_signal(self.end_login_real)
         self.set_background_color("#F3F3F3")
         self.container.set_as_core()
         self.container.build()
+        self.core.eventsys.subscribe(
+            "HONTOUROKUDONE", lambda data: self.fill_info(data)
+        )
+        self.mail = None
+        self.name = None
+        self.password = None
+
+    def end_login_real(self):
+        self.manager.go_to("totalsuccess", False)
+        self.core.info_tag.inform("登録は完了しました")
+        newuser = requests.post(
+            f"http://renteckdb.site/register/{self.name}/{self.password}/{self.mail}",
+        )
+
+        print("sended request", newuser.content)
+
+    def fill_info(self, data):
+        self.box.mail.text2.text = data[0]
+        self.box.name.text2.text = data[1]
+        self.mail = data[0]
+        self.name = data[1]
+        self.password = data[2]
+        self.box.name.text2.make_text_surface()

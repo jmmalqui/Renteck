@@ -13,11 +13,11 @@ class MesaStackVertical(_MesaContainer):
 
         if self._is_container_hovered():
             if pg.mouse.get_pressed(3)[0]:
-                print(self.elements)
                 items_total_height = sum(
                     [element.get_real_height() for element in self.elements]
                 )
                 element_height_coverage = items_total_height - self.height
+
                 # False scrolling fix
                 if items_total_height >= self.height:
                     for element in self.elements:
@@ -27,7 +27,6 @@ class MesaStackVertical(_MesaContainer):
                         if element.scrolloffset.y < -1 * element_height_coverage:
                             element.scrolloffset.y = -1 * element_height_coverage
                         element.update_rects()
-
         return super().update_scroll()
 
     def _compute_elements_positions(self):

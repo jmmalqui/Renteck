@@ -11,6 +11,7 @@ from const import APPSIZE
 
 class _MesaContainer:
     def __init__(self, parent) -> None:
+        self.saved_surface = None
         if isinstance(parent, MesaScene) or isinstance(parent, _MesaContainer):
             self.type_flag = MesaRenderFlag.CORE_CONTAINER
             self.parent = parent
@@ -66,6 +67,9 @@ class _MesaContainer:
             self.core = self.scene.manager.core
             self.surf_built = False
 
+    def kill(self):
+        self.parent.elements.remove(self)
+
     def get_events(self):
         return self.manager.get_events()
 
@@ -118,8 +122,8 @@ class _MesaContainer:
         ...
 
     def set_margin(self, margin_x, margin_y):
-        self.marginx = margin_x
-        self.marginy = margin_y
+        self.marginx = margin_x * self.core.ratio
+        self.marginy = margin_y * self.core.ratio
 
     def set_color_as_parent(self):
         self.background_color = self.parent.background_color
@@ -150,7 +154,7 @@ class _MesaContainer:
             return element.parent.width
 
         if element.width_flag == MesaRenderFlag.DISPLAY_WIDTH_WINDOW:
-            return APPSIZE[0]
+            return APPSIZE[0] * self.core.ratio
         if element.width_flag == MesaRenderFlag.DISPLAY_WIDTH_PARENT:
             return element.parent.width
         if element.width_flag == MesaRenderFlag.DISPLAY_WIDTH_REMAIN:
@@ -169,7 +173,8 @@ class _MesaContainer:
                         )
                     accum_width += other_element.width + other_element.marginx * 2
             return element.parent.width - accum_width
-        return element.pre_width
+        if element.width_flag == MesaCoreFlag.NOT_DECLARED_ON_INIT:
+            return element.pre_width
 
     def _compute_elements_surfaces_handle_height_case(self, element):
         if element.parent.type_flag == MesaRenderFlag.SLIDABLE_CONTAINER_HORIZONTAL:
@@ -177,7 +182,7 @@ class _MesaContainer:
         if element.parent.type_flag == MesaRenderFlag.SLIDABLE_CONTAINER_VERTICAL:
             return element.parent.height // 2
         if element.height_flag == MesaRenderFlag.DISPLAY_HEIGHT_WINDOW:
-            return APPSIZE[1]
+            return APPSIZE[1] * self.core.ratio
         if element.height_flag == MesaRenderFlag.DISPLAY_HEIGHT_PARENT:
             return element.parent.height
         if element.height_flag == MesaRenderFlag.DISPLAY_HEIGHT_REMAIN:
@@ -194,13 +199,21 @@ class _MesaContainer:
                         raise ValueError(
                             "Could not build surface. No enough information was given [TWO LAYOUTS WITH NO DEFINED HEIGHT]"
                         )
-                    accum_height += other_element.height + other_element.marginy * 2
+                    accum_height += (
+                        other_element.height
+                        + other_element.marginy * 2 * self.core.ratio
+                    )
+
             return element.parent.height - accum_height
-        return element.pre_height
+        if element.height_flag == MesaCoreFlag.NOT_DECLARED_ON_INIT:
+            return element.pre_height
 
     def update_rects(self):
         if self.surface_type == MesaCoreFlag.CORESURFACE:
-            self.rect = pg.Rect(self.absolute_position + self.scrolloffset, APPSIZE)
+            self.rect = pg.Rect(
+                self.absolute_position + self.scrolloffset,
+                [APPSIZE[0] * self.core.ratio, APPSIZE[1] * self.core.ratio],
+            )
         else:
             self.rect = pg.Rect(
                 self.absolute_position + self.scrolloffset + self.parent.scrolloffset,
@@ -209,14 +222,14 @@ class _MesaContainer:
 
     def compute_elements_surfaces(self):
         if self.surface_type == MesaCoreFlag.CORESURFACE:
-            self.rect = pg.Rect(self.absolute_position + self.scrolloffset, APPSIZE)
+            self.rect = pg.Rect(
+                self.absolute_position + self.scrolloffset,
+                [APPSIZE[0] * self.core.ratio, APPSIZE[1] * self.core.ratio],
+            )
         else:
             self.rect = pg.Rect(
                 self.absolute_position + self.scrolloffset, self.surface.get_size()
             )
-            # print(
-            #     f"[DEBUG] Surface of size {self.surface.get_size()} has been made. Component: {self.__class__.__name__} {self.absolute_position}"
-            # )
 
         for element in self.elements:
             element.height = (
@@ -235,7 +248,6 @@ class _MesaContainer:
                 ],
                 flags=pg.SRCALPHA,
             )
-            # print(element)
 
             if isinstance(element, _MesaContainer):
                 element.compute_elements_surfaces()
@@ -256,8 +268,8 @@ class _MesaContainer:
     def set_as_core(self):
         self.position = pg.Vector2(0, 0)
         self.absolute_position = pg.Vector2(0, 0)
-        self.width = APPSIZE[0]
-        self.height = APPSIZE[1]
+        self.width = APPSIZE[0] * self.core.ratio
+        self.height = APPSIZE[1] * self.core.ratio
         self.surface = self.scene.core.display
         self.surface_type = MesaCoreFlag.CORESURFACE
         self.rect = pg.Rect(self.absolute_position, APPSIZE)
@@ -301,8 +313,8 @@ class _MesaContainer:
         self.borders[3][2] = color
 
     def set_size_as_display(self):
-        self.width = APPSIZE[0]
-        self.height = APPSIZE[1]
+        self.width = pg.display.get_window_size()[0]
+        self.height = pg.display.get_window_size()[1]
 
         self.surface = self.scene.core.display
 
@@ -329,12 +341,12 @@ class _MesaContainer:
         self.set_width_as_parent()
 
     def set_fixed_width(self, value):
-        self.width = value
-        self.pre_width = value
+        self.width = int(value * self.core.ratio)
+        self.pre_width = value * self.core.ratio
 
     def set_fixed_height(self, value):
-        self.height = value
-        self.pre_height = value
+        self.height = int(value * self.core.ratio)
+        self.pre_height = value * self.core.ratio
 
     def add_element(self, element):
         if isinstance(element, (_MesaContainer)):
@@ -362,7 +374,6 @@ class _MesaContainer:
         if self.should_late_init:
             self.late_init()
             self.should_late_init = False
-            # delet
         if self.can_scroll:
             self.update_scroll()
         self.update()
@@ -387,20 +398,13 @@ class _MesaContainer:
 
         self.render()
         for element in self.elements:
-            if self.surf_built != True:
-                element.__corerender__()
-            else:
-                element.__corerender__()
+            element.__corerender__()
 
-        self.surf_built = True
         self.inherit_render()
         self.render_borders()
 
-        if self.scene.core.on_debug == False:
-            self.blit_into_parent()
-
-        else:
-            thick = 1
+        if self.scene.core.on_debug:
+            thick = 5
             if self.surface_type != MesaCoreFlag.CORESURFACE:
                 pg.draw.rect(
                     self.surface,
@@ -408,9 +412,9 @@ class _MesaContainer:
                     self.surface.get_rect(),
                     thick,
                 )
-                self.blit_into_parent()
+        self.blit_into_parent()
 
-        self.top_render()
+        # self.top_render()
 
     def blit_into_parent(self):
         if self.surface_type != MesaCoreFlag.CORESURFACE:

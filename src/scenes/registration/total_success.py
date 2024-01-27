@@ -1,3 +1,4 @@
+from const import SceneTitles
 from mesa import *
 import pygame as pg
 
@@ -19,7 +20,6 @@ class TotalSuccessScene(MesaScene):
 class Title1(MesaTextLabel):
     def __init__(self, parent, text) -> None:
         super().__init__(parent)
-
         self.set_width_as_parent()
         self.set_fixed_height(60)
         self.declare_font_type("NOSYS")
@@ -53,11 +53,9 @@ class Image1(MesaImage):
 class CustomText1(MesaTextLabel):
     def __init__(self, parent, text, height) -> None:
         super().__init__(parent)
-        # self.set_width_as_parent()
         self.set_fixed_height(height)
         self.set_fixed_width(360)
         self.set_margin(20, 0)
-        # self.set_margin(0,)
         self.declare_font_type("NOSYS")
         self.load_ttf("res/NotoSansJP-Regular.ttf")
         self.set_font_size(12)
@@ -86,7 +84,7 @@ class MyButton1(MesaButtonText):
         self.set_signal(self.show_press)
 
     def show_press(self):
-        self.manager.go_to("login")
+        self.manager.go_to(SceneTitles.SceneLogin)
 
 
 class box(MesaStackVertical):

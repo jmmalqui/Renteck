@@ -30,6 +30,10 @@ class MesaTextBoxInput(_MesaContainer):
         self.blink = False
         self.tick = 0
         self.offset = pg.Vector2(10, 0)
+        self.is_password = False
+
+    def password(self):
+        self.is_password = True
 
     def declare_font_type(self, _type: str):
         # This is subject to change, strings are considered bad practice.
@@ -148,6 +152,8 @@ class MesaTextBoxInput(_MesaContainer):
                 self._make_text_surface()
 
     def _make_text_surface(self):
+        if self.is_password:
+            self.text = "*" * len(self.text)
         self.text_surface = self.font.render(
             self.text,
             self.antialias,
@@ -187,35 +193,22 @@ class MesaTextBoxInput(_MesaContainer):
             self.pointer_position[0] - self.surface.get_width() + self.offset.x + 30, 0
         )
         overflow.x = max(0, overflow.x)
-        blink_width = 10
+        blink_width = 1
         blink_height = self.font_size + 2
         if self.metrics:
             blink_width = self.metrics[self.buffer.pointer - 1][4]
 
-        if self.blink:
-            pg.draw.rect(
-                self.surface,
-                [100, 100, 100, 120],
-                [
-                    self.pointer_position[0] + self.offset.x - overflow.x,
-                    self.text_position.y,
-                    blink_width,
-                    blink_height,
-                ],
-                0,
-            )
-        else:
-            pg.draw.rect(
-                self.surface,
-                [100, 100, 250, 190],
-                [
-                    self.pointer_position[0] + self.offset.x - overflow.x,
-                    self.text_position.y,
-                    blink_width,
-                    blink_height,
-                ],
-                0,
-            )
+        pg.draw.rect(
+            self.surface,
+            [0, 0, 0, 100],
+            [
+                self.pointer_position[0] + self.offset.x - overflow.x,
+                self.text_position.y,
+                2,
+                blink_height,
+            ],
+            0,
+        )
 
     def _draw_text(self):
         overflow = pg.Vector2(

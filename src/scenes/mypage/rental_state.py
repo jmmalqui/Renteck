@@ -1,5 +1,11 @@
+from datetime import datetime
+import json
+import requests
+from const import SceneTitles
 from mesa import *
 import pygame as pg
+
+from mesa.info_tag.tag import InfoTagLevels
 
 
 class Title(MesaTextLabel):
@@ -33,10 +39,11 @@ class modoru(MesaButtonText):
         self.center_vertical()
         self.set_margin(5, 10)
         self.parent.add_element(self)
-        # self.set_signal(self.show_press)
+        self.set_signal(self.show_press)
 
-    # def show_press(self):
-    # self.move_to_screen("")
+    def show_press(self):
+        print("here")
+        self.move_to_screen(SceneTitles.SceneMyPageEntry)
 
 
 class mainTitle1(MesaTextLabel):
@@ -83,7 +90,8 @@ class yoyakutitle(MesaTextLabel):
         self.load_ttf("res/NotoSansJP-Regular.ttf")
         self.set_font_size(16)
         self.set_text_color("#818181")
-        self.set_text("20XX/XX/XX")
+        self.set_text("未受取")
+        self.set_text_color("lightred")
         self.set_color_as_parent()
         self.set_margin(14, 4)
         self.parent.add_element(self)
@@ -120,67 +128,67 @@ class yoyakutext2(MesaTextLabel):
 
 
 class yoyakutextbox1(MesaStackHorizontal):
-    def __init__(self, parent) -> None:
+    def __init__(self, parent, text) -> None:
         super().__init__(parent)
         self.set_width_as_parent()
         self.set_fixed_height(21)
         self.set_background_color("white")
         self.set_margin(20, 0)
         self.text1 = yoyakutext1(self, "メーカー　　　　　：")
-        self.text2 = yoyakutext2(self, "レンタル中のPCのメーカ名")
+        self.text2 = yoyakutext2(self, f"{text}")
         self.parent.add_element(self)
 
 
 class yoyakutextbox2(MesaStackHorizontal):
-    def __init__(self, parent) -> None:
+    def __init__(self, parent, text) -> None:
         super().__init__(parent)
         self.set_width_as_parent()
         self.set_fixed_height(21)
         self.set_background_color("white")
         self.set_margin(20, 0)
         self.text1 = yoyakutext1(self, "機種名　　　　　　：")
-        self.text2 = yoyakutext2(self, "レンタル中のPCの機種名")
+        self.text2 = yoyakutext2(self, f"{text}")
         self.parent.add_element(self)
 
 
 class yoyakutextbox3(MesaStackHorizontal):
-    def __init__(self, parent) -> None:
+    def __init__(self, parent, text) -> None:
         super().__init__(parent)
         self.set_width_as_parent()
         self.set_fixed_height(21)
         self.set_background_color("white")
         self.set_margin(20, 0)
         self.text1 = yoyakutext1(self, "レンタル期間　　　：")
-        self.text2 = yoyakutext2(self, "xx時間")
+        self.text2 = yoyakutext2(self, f"{text}")
         self.parent.add_element(self)
 
 
 class yoyakutextbox4(MesaStackHorizontal):
-    def __init__(self, parent) -> None:
+    def __init__(self, parent, text) -> None:
         super().__init__(parent)
         self.set_width_as_parent()
         self.set_fixed_height(21)
         self.set_background_color("white")
         self.set_margin(20, 0)
         self.text1 = yoyakutext1(self, "レンタル開始日時　：")
-        self.text2 = yoyakutext2(self, "20xx年xx月xx日 xx:xx")
+        self.text2 = yoyakutext2(self, f"{text}")
         self.parent.add_element(self)
 
 
 class yoyakutextbox5(MesaStackHorizontal):
-    def __init__(self, parent) -> None:
+    def __init__(self, parent, text) -> None:
         super().__init__(parent)
         self.set_width_as_parent()
         self.set_fixed_height(21)
         self.set_background_color("white")
         self.set_margin(20, 0)
         self.text1 = yoyakutext1(self, "レンタル終了日時　：")
-        self.text2 = yoyakutext2(self, "20xx年xx月xx日 xx:xx")
+        self.text2 = yoyakutext2(self, f"{text}")
         self.parent.add_element(self)
 
 
 class yoyakubox(MesaStackVertical):
-    def __init__(self, parent) -> None:
+    def __init__(self, parent, maker, name, jikan, start, end) -> None:
         super().__init__(parent)
         self.set_fixed_width(360)
         self.set_fixed_height(168)
@@ -189,11 +197,11 @@ class yoyakubox(MesaStackVertical):
         self.kage = kage(self)
         self.box = whiteBox(self.kage)
         self.title = yoyakutitle(self.box)
-        self.text1 = yoyakutextbox1(self.box)
-        self.text2 = yoyakutextbox2(self.box)
-        self.text2 = yoyakutextbox3(self.box)
-        self.text2 = yoyakutextbox4(self.box)
-        self.text2 = yoyakutextbox5(self.box)
+        self.text1 = yoyakutextbox1(self.box, maker)
+        self.text2 = yoyakutextbox2(self.box, name)
+        self.text2 = yoyakutextbox3(self.box, jikan)
+        self.text2 = yoyakutextbox4(self.box, start)
+        self.text2 = yoyakutextbox5(self.box, end)
         self.parent.add_element(self)
 
 
@@ -235,66 +243,6 @@ class uketoriButton(MesaButtonText):
         self.parent.add_element(self)
 
 
-"""
-受け取り済みボタンを押す前の返却ボタンの表示
-class henkyakumae(MesaButtonText):
-    def __init__(self, parent) -> None:
-        super().__init__(parent)
-        self.set_fixed_width(182)
-        self.set_fixed_height(52)
-        self.declare_font_type("NOSYS")
-        self.load_ttf("res/NotoSansJP-Medium.ttf")
-        self.set_font_size(15)
-        self.set_text_color("#C3C3C3")
-        self.set_text("返却済みにする")
-        self.set_background_color("#818181")
-        self.center_text()
-        self.center_vertical()
-        self.set_margin(15,0)
-        self.parent.add_element(self)
-
-"""
-
-"""
-受け取り済みボタンを一度押したらこっちに換える
-class uketorizumi(MesaButtonText):
-    def __init__(self, parent) -> None:
-        super().__init__(parent)
-        self.set_fixed_width(150)
-        self.set_fixed_height(52)
-        self.declare_font_type("NOSYS")
-        self.load_ttf("res/NotoSansJP-Medium.ttf")
-        self.set_font_size(15)
-        self.set_text_color("#C3C3C3")
-        self.set_text("受け取り済み")
-        self.set_background_color("#818181")
-        self.center_text()
-        self.center_vertical()
-        self.set_margin(0,0)
-        self.parent.add_element(self)
-
-"""
-
-# どちらのボタンも押されたら履歴に移る
-"""
-レンタルしているPCがないときに表示
-class NOrentaru(MesaTextLabel):
-    def __init__(self, parent) -> None:
-        super().__init__(parent)
-        self.set_width_as_parent()
-        self.set_fixed_height(70)
-        self.declare_font_type("NOSYS")
-        self.load_ttf("res/NotoSansJP-medium.ttf")
-        self.set_font_size(16)
-        self.set_text_color("black")
-        self.set_text("現在レンタルしているPCはありません")
-        self.set_color_as_parent()
-        self.set_margin(30,20)
-        self.parent.add_element(self)
-
-"""
-
-
 class buttonbox(MesaStackHorizontal):
     def __init__(self, parent) -> None:
         super().__init__(parent)
@@ -307,18 +255,56 @@ class buttonbox(MesaStackHorizontal):
         self.parent.add_element(self)
 
 
-class rentarubox(MesaStackVertical):
-    def __init__(self, parent) -> None:
+class rekishibox(MesaStackVertical):
+    def __init__(
+        self, parent, maker, name, jikan, start, end, rentalnum, userid
+    ) -> None:
         super().__init__(parent)
         self.set_fixed_width(370)
-        self.set_fixed_height(300)
+        self.set_fixed_height(200)
         self.set_background_color("#F3F3F3")
         self.set_margin(15, 10)
-        self.title = mainTitle1(self)
-        self.box = yoyakubox(self)
-        self.button = buttonbox(self)
-        # self.text=NOrenteru(self)
+        self.rentalnum = rentalnum
+        self.userid = userid
+        self.box = yoyakubox(self, maker, name, jikan, start, end)
+        self.box.title.text = "返却済"
+        self.box.title.text_color = "lightblue"
+        self.box.title.make_text_surface()
         self.parent.add_element(self)
+
+
+class rentarubox(MesaStackVertical):
+    def __init__(
+        self, parent, maker, name, jikan, start, end, rentalnum, userid
+    ) -> None:
+        super().__init__(parent)
+        self.set_fixed_width(370)
+        self.set_fixed_height(250)
+        self.set_background_color("#F3F3F3")
+        self.set_margin(15, 10)
+        self.rentalnum = rentalnum
+        self.userid = userid
+        self.box = yoyakubox(self, maker, name, jikan, start, end)
+        self.button = buttonbox(self)
+        self.button.button1.set_signal(self.uketori)
+        self.button.button2.set_signal(self.henkyaku)
+        self.parent.add_element(self)
+
+    def uketori(self):
+        self.box.title.text = "受取済み"
+        self.box.title.text_color = "lightgreen"
+        self.box.title.make_text_surface()
+
+    def henkyaku(self):
+        req = requests.request(
+            "GET",
+            f"http://renteckdb.site/update_rental_status/{self.userid}/{self.rentalnum}",
+        )
+        self.box.title.text = "返却済"
+        self.box.title.text_color = "lightgreen"
+        self.box.title.make_text_surface()
+        self.box.set_background_color([200, 0, 0])
+        self.box.build()
 
 
 class mainTitle2(MesaTextLabel):
@@ -433,10 +419,10 @@ class rirekibox(MesaStackVertical):
     def __init__(self, parent) -> None:
         super().__init__(parent)
         self.set_fixed_width(370)
-        self.set_fixed_height(560)
+        self.set_fixed_height(800)
         self.set_background_color("#F3F3F3")
         self.set_margin(15, 10)
-        self.title = mainTitle2(self)
+
         self.box = rirekiwhitebox(self)
         self.box = rirekiwhitebox(self)
         self.box = rirekiwhitebox(self)
@@ -459,20 +445,102 @@ class homeButton(MesaButtonText):
         self.center_vertical()
         self.set_margin(105, 10)
         self.parent.add_element(self)
+        self.set_signal(self.gohome)
+
+    def gohome(self):
+        self.move_to_screen(SceneTitles.SceneRentalItemList, False)
 
 
 class scroll(MesaStackVertical):
     def __init__(self, parent) -> None:
         super().__init__(parent)
+
         self.set_width_as_parent()
-        self.set_height_as_parent()
+        self.set_height_as_remaining_area()
         self.set_background_color("#F3F3F3")
-        self.box = rentarubox(self)
+        self.title = mainTitle1(self)
+        self.rentaruboxxes = []
+        self.userid = None
+        self.core.eventsys.subscribe("USERLOGIN", lambda data: self.load_user(data))
+        self.core.eventsys.subscribe("RENTALSIGNAL", lambda data: self.REBUILD(data))
+
         self.button = homeButton(self)
-        self.button = homeButton(self)
-        self.box2 = rirekibox(self)
+        self.title2 = mainTitle2(self)
+        self.rekishiboxxes = []
         self.enable_scrolling()
         self.parent.add_element(self)
+
+    def late_init(self):
+        self.REBUILD(None)
+
+    def REBUILD(self, data: None):
+        self.elements = []
+        self.title = mainTitle1(self)
+        self.get_rentaru_boxxes()
+        self.button = homeButton(self)
+        self.title2 = mainTitle2(self)
+        self.get_rekishi_boxxes()
+        self.parent.build()
+
+    def load_user(self, data):
+        getid = requests.request("GET", f"http://renteckdb.site/uid/{data[0]}")
+        jsonid = json.loads(getid.content)
+        self.userid = jsonid["id"]
+        self.REBUILD(None)
+
+    def get_rentaru_boxxes(self):
+        self.rentaruboxxes = []
+        getdata = requests.request(
+            "GET", f"http://renteckdb.site/rstatus/{self.userid}/0"
+        )
+        jsondata = json.loads(getdata.content)
+        if "error" in jsondata:
+            return
+        for entry in jsondata:
+            diff = datetime.strptime(
+                entry["enddata"], "%a, %d %b %Y %H:%M:%S %Z"
+            ) - datetime.strptime(entry["startdata"], "%a, %d %b %Y %H:%M:%S %Z")
+            self.rentaruboxxes.append(
+                rentarubox(
+                    self,
+                    entry["manufacturer"],
+                    entry["model"],
+                    f"{diff}",
+                    entry["startdata"],
+                    entry["enddata"],
+                    entry["rentalnum"],
+                    entry["userid"],
+                )
+            )
+
+    def get_rekishi_boxxes(self):
+        self.rekishiboxxes = []
+        getdata = requests.request(
+            "GET", f"http://renteckdb.site/rstatus/{self.userid}/1"
+        )
+        jsondata = json.loads(getdata.content)
+        if "error" in jsondata:
+            self.core.info_tag.inform("歴史は見つかりませんでした", InfoTagLevels.ALERT)
+            self.title2.text = "歴史なし"
+            return
+        else:
+            for entry in jsondata:
+                diff = datetime.strptime(
+                    entry["enddata"], "%a, %d %b %Y %H:%M:%S %Z"
+                ) - datetime.strptime(entry["startdata"], "%a, %d %b %Y %H:%M:%S %Z")
+
+                self.rentaruboxxes.append(
+                    rekishibox(
+                        self,
+                        entry["manufacturer"],
+                        entry["model"],
+                        f"{diff}",
+                        entry["startdata"],
+                        entry["enddata"],
+                        entry["rentalnum"],
+                        entry["userid"],
+                    )
+                )
 
 
 class RentalStateScene(MesaScene):

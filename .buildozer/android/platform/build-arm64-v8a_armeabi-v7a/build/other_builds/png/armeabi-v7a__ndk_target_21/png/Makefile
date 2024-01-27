@@ -557,14 +557,14 @@ distcleancheck_listfiles = find . -type f -print
 
 #distribute headers in /usr/include/libpng/*
 pkgincludedir = $(includedir)/$(PNGLIB_BASENAME)
-ACLOCAL = ${SHELL} /home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png/missing aclocal-1.16
+ACLOCAL = ${SHELL} /home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png/missing aclocal-1.16
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = /home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar
 AS = as
-AUTOCONF = ${SHELL} /home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png/missing autoconf
-AUTOHEADER = ${SHELL} /home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png/missing autoheader
-AUTOMAKE = ${SHELL} /home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png/missing automake-1.16
+AUTOCONF = ${SHELL} /home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png/missing autoconf
+AUTOHEADER = ${SHELL} /home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png/missing autoheader
+AUTOMAKE = ${SHELL} /home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png/missing automake-1.16
 AWK = gawk
 CC = /home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/clang -target armv7a-linux-androideabi21 -fomit-frame-pointer -march=armv7-a -mfloat-abi=softfp -mfpu=vfp -mthumb -fPIC
 CCAS = /home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/clang -target armv7a-linux-androideabi21 -fomit-frame-pointer -march=armv7-a -mfloat-abi=softfp -mfpu=vfp -mthumb -fPIC
@@ -573,7 +573,7 @@ CCASFLAGS = -target armv7a-linux-androideabi21 -fomit-frame-pointer -march=armv7
 CCDEPMODE = depmode=gcc3
 CFLAGS = -target armv7a-linux-androideabi21 -fomit-frame-pointer -march=armv7-a -mfloat-abi=softfp -mfpu=vfp -mthumb -fPIC
 CPP = /home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/clang -target armv7a-linux-androideabi21 -fomit-frame-pointer -march=armv7-a -mfloat-abi=softfp -mfpu=vfp -mthumb -fPIC -E
-CPPFLAGS = -DANDROID -I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -I/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1
+CPPFLAGS = -DANDROID -I/home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include -I/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/python-installs/renteck/armeabi-v7a/include/python3.1
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -600,7 +600,7 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/ld
-LDFLAGS =   -L/home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a
+LDFLAGS =   -L/home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/libs_collections/renteck/armeabi-v7a
 LIBOBJS =  ${LIBOBJDIR}strtod$U.o
 LIBS = -lm -lz -lm 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
@@ -609,7 +609,7 @@ LN_S = ln -s
 LTLIBOBJS =  ${LIBOBJDIR}strtod$U.lo
 LT_SYS_LIBRARY_PATH = 
 MAINT = #
-MAKEINFO = ${SHELL} /home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png/missing makeinfo
+MAKEINFO = ${SHELL} /home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
 NM = nm
@@ -644,10 +644,10 @@ SHELL = /bin/bash
 STRIP = /home/johan/.buildozer/android/platform/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-strip --strip-unneeded
 SYMBOL_PREFIX = 
 VERSION = 1.6.37
-abs_builddir = /home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png
-abs_srcdir = /home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png
-abs_top_builddir = /home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png
-abs_top_srcdir = /home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png
+abs_builddir = /home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png
+abs_srcdir = /home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png
+abs_top_builddir = /home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png
+abs_top_srcdir = /home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png
 ac_ct_AR = 
 ac_ct_CC = 
 ac_ct_DUMPBIN = link -dump
@@ -679,7 +679,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png/install-sh
+install_sh = ${SHELL} /home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -692,7 +692,7 @@ pdfdir = ${docdir}
 # pkg-config stuff, note that libpng.pc is always required in order
 # to get the correct library
 pkgconfigdir = ${libdir}/pkgconfig
-prefix = /home/johan/johan/dev/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png/install
+prefix = /home/johan/johan/dev/old/Renteck/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a/build/other_builds/png/armeabi-v7a__ndk_target_21/png/install
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin

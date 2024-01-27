@@ -1,6 +1,5 @@
 import mesa
 import pygame as pg
-from scenes.entry.entry_scene import EntryScene
 
 from scenes.registration.login import LoginScene
 
@@ -29,11 +28,10 @@ class Renteck(mesa.MesaCore):
     def __init__(self) -> None:
         super().__init__()
         self.set_application_name("Renteck")
-        self.set_rendering_flags(pg.SCALED, pg.DOUBLEBUF, pg.FULLSCREEN)
+        self.set_rendering_flags(pg.SCALED, pg.DOUBLEBUF)
         self.set_display_size(APPSIZE[0], APPSIZE[1])
-        # self.set_background_color("orange")
         self.set_clock(600)
-        self.entry = EntryScene(self, "entry", self.scene_manager)
+        self.userid = None
         self.login = LoginScene(self, "login", self.scene_manager)
 
         self.mypageentry = MyPageEntryScene(self, "mypageentry", self.scene_manager)
@@ -53,15 +51,6 @@ class Renteck(mesa.MesaCore):
         )
         self.rental_period = RentalPeriodScene(self, "rental-set", self.scene_manager)
         self.rental_success = RentalSuccess(self, "rental-success", self.scene_manager)
-        self.scene_manager.set_init_scene("entry")
+        self.scene_manager.set_init_scene("login")
 
         self.debugfont = pg.font.SysFont("Arial", 30)
-        self.sruf = self.debugfont.render(
-            f"{pg.display.get_window_size()}", True, "red"
-        )
-
-    def render(self):
-        self.sruf = self.debugfont.render(
-            f"FPS:{self.clock.get_fps():.2f}", True, "red"
-        )
-        self.display.blit(self.sruf, [20, 20])

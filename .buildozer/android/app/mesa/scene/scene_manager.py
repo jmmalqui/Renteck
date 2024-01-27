@@ -31,7 +31,6 @@ class MesaSceneManager:
 
     def set_init_scene(self, scene_name):
         self.current_scene_name = scene_name
-        print(f"{self.current_scene_name}：実行中")
 
     def get_events(self):
         return self.events
@@ -99,5 +98,3 @@ class MesaSceneManager:
 
     def render(self):
         self.current_scene.__corerender__()
-        if self.fade_level.get_value() != 0:
-            self.core.display.blit(self.fade_surf, [0, 0])

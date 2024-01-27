@@ -38,7 +38,6 @@ class MesaSingleContainer(_MesaContainer):
 
     def resize_match_parent_height(self):
         height = self.height
-        print(height)
         width = (
             self.original_image.get_width() * height / self.original_image.get_height()
         )

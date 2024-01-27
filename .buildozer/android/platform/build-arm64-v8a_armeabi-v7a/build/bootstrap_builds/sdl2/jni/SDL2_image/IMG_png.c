@@ -1,6 +1,6 @@
 /*
   SDL_image:  An example image loading library for use with SDL
-  Copyright (C) 1997-2022 Sam Lantinga <slouken@libsdl.org>
+  Copyright (C) 1997-2023 Sam Lantinga <slouken@libsdl.org>
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages
@@ -603,7 +603,7 @@ static int IMG_SavePNG_RW_libpng(SDL_Surface *surface, SDL_RWops *dst, int freed
             int i;
             int last_transparent = -1;
 
-            color_ptr = (png_colorp)SDL_malloc(sizeof(png_colorp) * ncolors);
+            color_ptr = (png_colorp)SDL_malloc(sizeof(png_color) * ncolors);
             if (color_ptr == NULL)
             {
                 lib.png_destroy_write_struct(&png_ptr, &info_ptr);
@@ -656,6 +656,7 @@ static int IMG_SavePNG_RW_libpng(SDL_Surface *surface, SDL_RWops *dst, int freed
 
             row_pointers = (png_bytep *) SDL_malloc(sizeof(png_bytep) * source->h);
             if (!row_pointers) {
+                SDL_free(color_ptr);
                 lib.png_destroy_write_struct(&png_ptr, &info_ptr);
                 IMG_SetError("Out of memory");
                 return -1;

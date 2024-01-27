@@ -8,6 +8,7 @@ import pygame as pg
 
 from const import PATH
 
+
 class MesaImage(_MesaContainer):
     def __init__(self, parent) -> None:
         super().__init__(parent)
@@ -36,7 +37,7 @@ class MesaImage(_MesaContainer):
             self.image = None
             self.original_image = None
         else:
-            self.image = pg.image.load(os.path.join(PATH, path)).convert_alpha()
+            self.image = pg.image.load(os.path.join(PATH, path))
             self.original_image = self.image.copy()
 
     def resize_image(self, size):

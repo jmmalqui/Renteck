@@ -1,5 +1,11 @@
+import json
+import requests
+from const import SceneTitles
 from mesa import *
 import pygame as pg
+import datetime
+
+from mesa.info_tag.tag import InfoTagLevels
 
 
 class Title(MesaTextLabel):
@@ -214,10 +220,6 @@ class kakuninButton(MesaButtonText):
         self.center_vertical()
         self.set_margin(84, 30)
         self.parent.add_element(self)
-        self.set_signal(self.show_press)
-
-    def show_press(self):
-        self.move_to_screen("rental-success", False)
 
 
 class namisenImage(MesaImage):
@@ -263,6 +265,87 @@ class scroll(MesaStackVertical):
         self.box2 = finalbox(self)
         self.button = kakuninButton(self)
         self.parent.add_element(self)
+        self.button.set_signal(self.show_press)
+        self.core.eventsys.subscribe("DATATRANSFER", lambda data: self.get_data(data))
+        self.data = None
+
+    def get_data(self, data):
+        self.data = data
+
+    def show_press(self):
+        can_cotinue = True
+        begin = [
+            self.box1.nichiji.yearbox.get_written_text(),
+            self.box1.nichiji.month.get_written_text(),
+            self.box1.nichiji.day.get_written_text(),
+            self.box1.nichiji.time.get_written_text(),
+        ]
+        end = [
+            self.box2.nichiji.yearbox.get_written_text(),
+            self.box2.nichiji.month.get_written_text(),
+            self.box2.nichiji.day.get_written_text(),
+            self.box2.nichiji.time.get_written_text(),
+        ]
+        try:
+            begintime = datetime.datetime(
+                year=int(begin[0]),
+                month=int(begin[1]),
+                day=int(begin[2]),
+                hour=int(begin[3]),
+            )
+        except ValueError as e:
+            self.core.info_tag.inform(f"適切な日時ではありません:  {e}", InfoTagLevels.CRITICAL)
+            can_cotinue = False
+
+        try:
+            endtime = datetime.datetime(
+                year=int(end[0]), month=int(end[1]), day=int(end[2]), hour=int(end[3])
+            )
+
+        except ValueError as e:
+            self.core.info_tag.inform(f"適切な日時ではありません: {e}", InfoTagLevels.CRITICAL)
+            can_cotinue = False
+
+        for entry in begin:
+            if not entry.isnumeric():
+                self.core.info_tag.inform("数字だけ入力してください。", InfoTagLevels.CRITICAL)
+                can_cotinue = False
+        for entry in end:
+            if not entry.isnumeric():
+                self.core.info_tag.inform("数字だけ入力してください。", InfoTagLevels.CRITICAL)
+                can_cotinue = False
+
+        if begin.count("") != 0 or end.count("") != 0:
+            self.core.info_tag.inform("全てのボックスを埋めてください", InfoTagLevels.CRITICAL)
+            can_cotinue = False
+        if can_cotinue:
+            getid = requests.request(
+                "GET", f"http://renteckdb.site/uid/{self.data[0][0]}"
+            )
+            getidjson = json.loads(getid.content)
+            userid = getidjson["id"]
+            pcid = self.data[1]
+            rentalnumber = self.data[2]
+            returned = 0
+            received = 1
+            start = begintime.strftime("%Y-%m-%d %H:%M:%S")
+            end = endtime.strftime("%Y-%m-%d %H:%M:%S")
+
+            self.core.eventsys.emit(
+                "RENTALSIGNAL",
+                [
+                    self.data[3],
+                    start,
+                    end,
+                    pcid,
+                    userid,
+                    rentalnumber,
+                    received,
+                    returned,
+                ],
+            )
+
+            self.move_to_screen(SceneTitles.ConfirmRental, False)
 
 
 class RentalPeriodScene(MesaScene):
@@ -272,5 +355,6 @@ class RentalPeriodScene(MesaScene):
         self.container = MesaStackVertical(self)
         self.title = Title(self.container, "Renteck")
         self.scroll = scroll(self.container)
+
         self.container.set_as_core()
         self.container.build()

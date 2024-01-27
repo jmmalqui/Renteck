@@ -1,4 +1,4 @@
-#    pygame - Python Game Library
+#    pygame-ce - Python Game Library
 #    Copyright (C) 2000-2003, 2007  Pete Shinners
 #              (C) 2004 Joe Wreschnig
 #    This library is free software; you can redistribute it and/or
@@ -85,7 +85,8 @@ Sprites are not thread safe, so lock them yourself if using threads.
 # specific ones that aren't quite so general but fit into common
 # specialized cases.
 
-from operator import truth
+from warnings import warn
+from typing import Optional
 
 import pygame
 
@@ -94,7 +95,7 @@ from pygame.time import get_ticks
 from pygame.mask import from_surface
 
 
-class Sprite(object):
+class Sprite:
     """simple base class for visible game objects
 
     pygame.sprite.Sprite(*groups): return Sprite
@@ -111,8 +112,26 @@ class Sprite(object):
 
     def __init__(self, *groups):
         self.__g = {}  # The groups the sprite is in
+        self.__image: Optional[pygame.surface.Surface] = None
+        self.__rect: Optional[pygame.rect.Rect] = None
         if groups:
             self.add(*groups)
+
+    @property
+    def image(self):
+        return self.__image
+
+    @image.setter
+    def image(self, value: Optional[pygame.surface.Surface]):
+        self.__image = value
+
+    @property
+    def rect(self):
+        return self.__rect
+
+    @rect.setter
+    def rect(self, value: Optional[pygame.rect.Rect]):
+        self.__rect = value
 
     def add(self, *groups):
         """add the sprite to groups
@@ -125,7 +144,7 @@ class Sprite(object):
         """
         has = self.__g.__contains__
         for group in groups:
-            if hasattr(group, '_spritegroup'):
+            if hasattr(group, "_spritegroup"):
                 if not has(group):
                     group.add_internal(self)
                     self.add_internal(group)
@@ -143,7 +162,7 @@ class Sprite(object):
         """
         has = self.__g.__contains__
         for group in groups:
-            if hasattr(group, '_spritegroup'):
+            if hasattr(group, "_spritegroup"):
                 if has(group):
                     group.remove_internal(self)
                     self.remove_internal(group)
@@ -212,11 +231,10 @@ class Sprite(object):
 
         Returns True when the Sprite belongs to one or more Groups.
         """
-        return truth(self.__g)
+        return bool(self.__g)
 
     def __repr__(self):
-        return "<%s Sprite(in %d groups)>" % (self.__class__.__name__,
-                                              len(self.__g))
+        return f"<{self.__class__.__name__} Sprite(in {len(self.__g)} groups)>"
 
     @property
     def layer(self):
@@ -232,17 +250,19 @@ class Sprite(object):
 
         :return: layer as an int, or raise AttributeError.
         """
-        return getattr(self, '_layer')
+        return getattr(self, "_layer")
 
     @layer.setter
     def layer(self, value):
         if not self.alive():
-            setattr(self, '_layer', value)
+            setattr(self, "_layer", value)
         else:
-            raise AttributeError("Can't set layer directly after "
-                                 "adding to group. Use "
-                                 "group.change_layer(sprite, new_layer) "
-                                 "instead.")
+            raise AttributeError(
+                "Can't set layer directly after "
+                "adding to group. Use "
+                "group.change_layer(sprite, new_layer) "
+                "instead."
+            )
 
 
 class DirtySprite(Sprite):
@@ -272,13 +292,12 @@ class DirtySprite(Sprite):
         the screen.)
 
     _layer = 0
-        0 is the default value but this is able to be set differently
+        0 is the default value but this can be set differently
         when subclassing.
 
     """
 
     def __init__(self, *groups):
-
         self.dirty = 1
 
         # referred to as special_flags in the documentation of Surface.blit
@@ -286,7 +305,7 @@ class DirtySprite(Sprite):
         self._visible = 1
 
         # Default 0 unless initialized differently.
-        self._layer = getattr(self, '_layer', 0)
+        self._layer = getattr(self, "_layer", 0)
         self.source_rect = None
         Sprite.__init__(self, *groups)
 
@@ -328,17 +347,20 @@ class DirtySprite(Sprite):
         if not self.alive():
             self._layer = value
         else:
-            raise AttributeError("Can't set layer directly after "
-                                 "adding to group. Use "
-                                 "group.change_layer(sprite, new_layer) "
-                                 "instead.")
+            raise AttributeError(
+                "Can't set layer directly after "
+                "adding to group. Use "
+                "group.change_layer(sprite, new_layer) "
+                "instead."
+            )
 
     def __repr__(self):
-        return "<%s DirtySprite(in %d groups)>" % \
-            (self.__class__.__name__, len(self.groups()))
+        return (
+            f"<{self.__class__.__name__} DirtySprite(in {len(self.groups())} groups)>"
+        )
 
 
-class AbstractGroup(object):
+class AbstractGroup:
     """base class for containers of sprites
 
     AbstractGroup does everything needed to behave as a normal group. You can
@@ -370,17 +392,18 @@ class AbstractGroup(object):
         """
         return list(self.spritedict)
 
-    def add_internal(self,
-                     sprite,
-                     layer=None  # noqa pylint: disable=unused-argument; supporting legacy derived classes that override in non-pythonic way
-                     ):
+    def add_internal(
+        self,
+        sprite,
+        layer=None,  # noqa pylint: disable=unused-argument; supporting legacy derived classes that override in non-pythonic way
+    ):
         """
         For adding a sprite to this group internally.
 
         :param sprite: The sprite we are adding.
         :param layer: the layer to add to, if the group type supports layers
         """
-        self.spritedict[sprite] = 0
+        self.spritedict[sprite] = None
 
     def remove_internal(self, sprite):
         """
@@ -410,7 +433,9 @@ class AbstractGroup(object):
         and has the same sprites in it.
 
         """
-        return self.__class__(self.sprites()) # noqa pylint: disable=too-many-function-args; needed because copy() won't work on AbstractGroup
+        return self.__class__(  # noqa pylint: disable=too-many-function-args
+            self.sprites()  # Needed because copy() won't work on AbstractGroup
+        )
 
     def __iter__(self):
         return iter(self.sprites())
@@ -444,7 +469,7 @@ class AbstractGroup(object):
                     # instance of the Sprite class or is not an instance of a
                     # subclass of the Sprite class. Alternately, it could be an
                     # old-style sprite group.
-                    if hasattr(sprite, '_spritegroup'):
+                    if hasattr(sprite, "_spritegroup"):
                         for spr in sprite.sprites():
                             if not self.has_internal(spr):
                                 self.add_internal(spr)
@@ -476,7 +501,7 @@ class AbstractGroup(object):
                 try:
                     self.remove(*sprite)
                 except (TypeError, AttributeError):
-                    if hasattr(sprite, '_spritegroup'):
+                    if hasattr(sprite, "_spritegroup"):
                         for spr in sprite.sprites():
                             if self.has_internal(spr):
                                 self.remove_internal(spr)
@@ -508,7 +533,7 @@ class AbstractGroup(object):
                     if not self.has(*sprite):
                         return False
                 except (TypeError, AttributeError):
-                    if hasattr(sprite, '_spritegroup'):
+                    if hasattr(sprite, "_spritegroup"):
                         for spr in sprite.sprites():
                             if not self.has_internal(spr):
                                 return False
@@ -533,7 +558,7 @@ class AbstractGroup(object):
     def draw(self, surface):
         """draw all sprites onto the surface
 
-        Group.draw(surface): return None
+        Group.draw(surface): return Rect_list
 
         Draws all of the member sprites onto the given surface.
 
@@ -541,15 +566,15 @@ class AbstractGroup(object):
         sprites = self.sprites()
         if hasattr(surface, "blits"):
             self.spritedict.update(
-                zip(
-                    sprites,
-                    surface.blits((spr.image, spr.rect) for spr in sprites)
-                )
+                zip(sprites, surface.blits((spr.image, spr.rect) for spr in sprites))
             )
         else:
             for spr in sprites:
                 self.spritedict[spr] = surface.blit(spr.image, spr.rect)
         self.lostsprites = []
+        dirty = self.lostsprites
+
+        return dirty
 
     def clear(self, surface, bgd):
         """erase the previous position of all sprites
@@ -588,10 +613,8 @@ class AbstractGroup(object):
             self.remove_internal(sprite)
             sprite.remove_internal(self)
 
-    def __nonzero__(self):
-        return truth(self.sprites())
-
-    __bool__ = __nonzero__
+    def __bool__(self):
+        return bool(self.sprites())
 
     def __len__(self):
         """return number of sprites in group
@@ -604,7 +627,7 @@ class AbstractGroup(object):
         return len(self.sprites())
 
     def __repr__(self):
-        return "<%s(%d sprites)>" % (self.__class__.__name__, len(self))
+        return f"<{self.__class__.__name__}({len(self)} sprites)>"
 
 
 class Group(AbstractGroup):
@@ -626,13 +649,30 @@ class Group(AbstractGroup):
     iterated over in no particular order.
 
     """
+
     def __init__(self, *sprites):
         AbstractGroup.__init__(self)
         self.add(*sprites)
 
 
-RenderPlain = Group
-RenderClear = Group
+class RenderPlain(Group):
+    def __init__(self, *sprites):
+        super().__init__(*sprites)
+        warn(
+            "This class will be removed in version 2.4.0",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+
+
+class RenderClear(Group):
+    def __init__(self, *sprites):
+        super().__init__(*sprites)
+        warn(
+            "This class will be removed in version 2.4.0",
+            DeprecationWarning,
+            stacklevel=2,
+        )
 
 
 class RenderUpdates(Group):
@@ -644,6 +684,7 @@ class RenderUpdates(Group):
     method that tracks the changed areas of the screen.
 
     """
+
     def draw(self, surface):
         surface_blit = surface.blit
         dirty = self.lostsprites
@@ -665,36 +706,21 @@ class RenderUpdates(Group):
 
 
 class OrderedUpdates(RenderUpdates):
-    """RenderUpdates class that draws Sprites in order of addition
-
-    pygame.sprite.OrderedUpdates(*spites): return OrderedUpdates
-
-    This class derives from pygame.sprite.RenderUpdates().  It maintains
-    the order in which the Sprites were added to the Group for rendering.
-    This makes adding and removing Sprites from the Group a little
-    slower than regular Groups.
-
-    """
     def __init__(self, *sprites):
-        self._spritelist = []
-        RenderUpdates.__init__(self, *sprites)
-
-    def sprites(self):
-        return list(self._spritelist)
-
-    def add_internal(self, sprite, layer=None):
-        RenderUpdates.add_internal(self, sprite)
-        self._spritelist.append(sprite)
-
-    def remove_internal(self, sprite):
-        RenderUpdates.remove_internal(self, sprite)
-        self._spritelist.remove(sprite)
+        super().__init__(*sprites)
+        warn(
+            "OrderedUpdates is now just an alias to RenderUpdates, order of "
+            "sprites is now maintained in all sprite Group classes. This "
+            "class will be removed in version 2.4.0",
+            DeprecationWarning,
+            stacklevel=2,
+        )
 
 
 class LayeredUpdates(AbstractGroup):
     """LayeredUpdates Group handles layers, which are drawn like OrderedUpdates
 
-    pygame.sprite.LayeredUpdates(*spites, **kwargs): return LayeredUpdates
+    pygame.sprite.LayeredUpdates(*sprites, **kwargs): return LayeredUpdates
 
     This group is fully compatible with pygame.sprite.Sprite.
     New in pygame 1.8.0
@@ -719,7 +745,7 @@ class LayeredUpdates(AbstractGroup):
         self._spritelayers = {}
         self._spritelist = []
         AbstractGroup.__init__(self)
-        self._default_layer = kwargs.get('default_layer', 0)
+        self._default_layer = kwargs.get("default_layer", 0)
 
         self.add(*sprites, **kwargs)
 
@@ -736,9 +762,9 @@ class LayeredUpdates(AbstractGroup):
                 layer = sprite.layer
             except AttributeError:
                 layer = self._default_layer
-                setattr(sprite, '_layer', layer)
-        elif hasattr(sprite, '_layer'):
-            setattr(sprite, '_layer', layer)
+                setattr(sprite, "_layer", layer)
+        elif hasattr(sprite, "_layer"):
+            setattr(sprite, "_layer", layer)
 
         sprites = self._spritelist  # speedup
         sprites_layers = self._spritelayers
@@ -775,7 +801,7 @@ class LayeredUpdates(AbstractGroup):
 
         if not sprites:
             return
-        layer = kwargs['layer'] if 'layer' in kwargs else None
+        layer = kwargs["layer"] if "layer" in kwargs else None
         for sprite in sprites:
             # It's possible that some sprite is also an iterator.
             # If this is the case, we should add the sprite itself,
@@ -794,7 +820,7 @@ class LayeredUpdates(AbstractGroup):
                     # instance of the Sprite class or is not an instance of a
                     # subclass of the Sprite class. Alternately, it could be an
                     # old-style sprite group.
-                    if hasattr(sprite, '_spritegroup'):
+                    if hasattr(sprite, "_spritegroup"):
                         for spr in sprite.sprites():
                             if not self.has_internal(spr):
                                 self.add_internal(spr, layer)
@@ -814,19 +840,19 @@ class LayeredUpdates(AbstractGroup):
         old_rect = self.spritedict[sprite]
         if old_rect is not self._init_rect:
             self.lostsprites.append(old_rect)  # dirty rect
-        if hasattr(sprite, 'rect'):
+        if hasattr(sprite, "rect"):
             self.lostsprites.append(sprite.rect)  # dirty rect
 
         del self.spritedict[sprite]
         del self._spritelayers[sprite]
 
     def sprites(self):
-        """return a ordered list of sprites (first back, last top).
+        """return an ordered list of sprites (first back, last top).
 
         LayeredUpdates.sprites(): return sprites
 
         """
-        return list(self._spritelist)
+        return self._spritelist.copy()
 
     def draw(self, surface):
         """draw all sprites in the right order onto the passed surface
@@ -926,8 +952,8 @@ class LayeredUpdates(AbstractGroup):
         while mid < leng and sprites_layers[sprites[mid]] <= new_layer:
             mid += 1
         sprites.insert(mid, sprite)
-        if hasattr(sprite, '_layer'):
-            setattr(sprite, '_layer', new_layer)
+        if hasattr(sprite, "_layer"):
+            setattr(sprite, "_layer", new_layer)
 
         # add layer info
         sprites_layers[sprite] = new_layer
@@ -988,13 +1014,13 @@ class LayeredUpdates(AbstractGroup):
         return self._spritelist[-1]
 
     def get_sprites_from_layer(self, layer):
-        """return all sprites from a layer ordered as they where added
+        """return all sprites from a layer ordered as they were added
 
         LayeredUpdates.get_sprites_from_layer(layer): return sprites
 
         Returns all sprites from a layer. The sprites are ordered in the
-        sequence that they where added. (The sprites are not removed from the
-        layer.
+        sequence that they were added. (The sprites are not removed from the
+        layer).
 
         """
         sprites = []
@@ -1027,7 +1053,7 @@ class LayeredUpdates(AbstractGroup):
 class LayeredDirty(LayeredUpdates):
     """LayeredDirty Group is for DirtySprites; subclasses LayeredUpdates
 
-    pygame.sprite.LayeredDirty(*spites, **kwargs): return LayeredDirty
+    pygame.sprite.LayeredDirty(*sprites, **kwargs): return LayeredDirty
 
     This group requires pygame.sprite.DirtySprite or any sprite that
     has the following attributes:
@@ -1036,7 +1062,7 @@ class LayeredDirty(LayeredUpdates):
     It uses the dirty flag technique and is therefore faster than
     pygame.sprite.RenderUpdates if you have many static sprites.  It
     also switches automatically between dirty rect updating and full
-    screen drawing, so you do no have to worry which would be faster.
+    screen drawing, so you do not have to worry which would be faster.
 
     As with the pygame.sprite.Group, you can specify some additional attributes
     through kwargs:
@@ -1054,7 +1080,7 @@ class LayeredDirty(LayeredUpdates):
     def __init__(self, *sprites, **kwargs):
         """initialize group.
 
-        pygame.sprite.LayeredDirty(*spites, **kwargs): return LayeredDirty
+        pygame.sprite.LayeredDirty(*sprites, **kwargs): return LayeredDirty
 
         You can specify some additional attributes through kwargs:
             _use_update: True/False   (default is False)
@@ -1074,8 +1100,9 @@ class LayeredDirty(LayeredUpdates):
 
         self._bgd = None
         for key, val in kwargs.items():
-            if (key in ['_use_update', '_time_threshold', '_default_layer']
-                    and hasattr(self, key)):
+            if key in ["_use_update", "_time_threshold", "_default_layer"] and hasattr(
+                self, key
+            ):
                 setattr(self, key, val)
 
     def add_internal(self, sprite, layer=None):
@@ -1085,11 +1112,11 @@ class LayeredDirty(LayeredUpdates):
 
         """
         # check if all needed attributes are set
-        if not hasattr(sprite, 'dirty'):
+        if not hasattr(sprite, "dirty"):
             raise AttributeError()
-        if not hasattr(sprite, 'visible'):
+        if not hasattr(sprite, "visible"):
             raise AttributeError()
-        if not hasattr(sprite, 'blendmode'):
+        if not hasattr(sprite, "blendmode"):
             raise AttributeError()
 
         if not isinstance(sprite, DirtySprite):
@@ -1100,7 +1127,9 @@ class LayeredDirty(LayeredUpdates):
 
         LayeredUpdates.add_internal(self, sprite, layer)
 
-    def draw(self, surface, bgd=None):  # noqa pylint: disable=arguments-differ; unable to change public interface
+    def draw(
+        self, surface, bgd=None
+    ):  # noqa pylint: disable=arguments-differ; unable to change public interface
         """draw all sprites in the right order onto the given surface
 
         LayeredDirty.draw(surface, bgd=None): return Rect_list
@@ -1132,10 +1161,15 @@ class LayeredDirty(LayeredUpdates):
         if self._use_update:  # dirty rects mode
             # 1. find dirty area on screen and put the rects into
             # self.lostsprites still not happy with that part
-            self._find_dirty_area(latest_clip, local_old_rect,
-                                  rect_type, local_sprites,
-                                  local_update,
-                                  local_update.append, self._init_rect)
+            self._find_dirty_area(
+                latest_clip,
+                local_old_rect,
+                rect_type,
+                local_sprites,
+                local_update,
+                local_update.append,
+                self._init_rect,
+            )
             # can it be done better? because that is an O(n**2) algorithm in
             # worst case
 
@@ -1145,31 +1179,30 @@ class LayeredDirty(LayeredUpdates):
                     surf_blit_func(local_bgd, rec, rec)
 
             # 2. draw
-            self._draw_dirty_internal(local_old_rect, rect_type,
-                                      local_sprites,
-                                      surf_blit_func, local_update)
+            self._draw_dirty_internal(
+                local_old_rect, rect_type, local_sprites, surf_blit_func, local_update
+            )
             local_ret = list(local_update)
         else:  # flip, full screen mode
             if local_bgd is not None:
                 surf_blit_func(local_bgd, (0, 0))
             for spr in local_sprites:
                 if spr.visible:
-                    local_old_rect[spr] = surf_blit_func(spr.image,
-                                                         spr.rect,
-                                                         spr.source_rect,
-                                                         spr.blendmode)
+                    local_old_rect[spr] = surf_blit_func(
+                        spr.image, spr.rect, spr.source_rect, spr.blendmode
+                    )
             # return only the part of the screen changed
             local_ret = [rect_type(latest_clip)]
 
         # timing for switching modes
         # How may a good threshold be found? It depends on the hardware.
         end_time = get_ticks()
-        if end_time-start_time > self._time_threshold:
+        if end_time - start_time > self._time_threshold:
             self._use_update = False
         else:
             self._use_update = True
 
-        # emtpy dirty rects list
+        # empty dirty rects list
         local_update[:] = []
 
         # -------
@@ -1178,16 +1211,14 @@ class LayeredDirty(LayeredUpdates):
         return local_ret
 
     @staticmethod
-    def _draw_dirty_internal(_old_rect, _rect, _sprites, _surf_blit,
-                             _update):
+    def _draw_dirty_internal(_old_rect, _rect, _sprites, _surf_blit, _update):
         for spr in _sprites:
             if spr.dirty < 1 and spr.visible:
                 # sprite not dirty; blit only the intersecting part
                 if spr.source_rect is not None:
                     # For possible future speed up, source_rect's data
                     # can be pre-fetched outside of this loop.
-                    _spr_rect = _rect(spr.rect.topleft,
-                                      spr.source_rect.size)
+                    _spr_rect = _rect(spr.rect.topleft, spr.source_rect.size)
                     rect_offset_x = spr.source_rect[0] - _spr_rect[0]
                     rect_offset_y = spr.source_rect[1] - _spr_rect[1]
                 else:
@@ -1200,31 +1231,34 @@ class LayeredDirty(LayeredUpdates):
                 for idx in _spr_rect.collidelistall(_update):
                     # clip
                     clip = _spr_rect_clip(_update[idx])
-                    _surf_blit(spr.image,
-                               clip,
-                               (clip[0] + rect_offset_x,
-                                clip[1] + rect_offset_y,
-                                clip[2],
-                                clip[3]),
-                               spr.blendmode)
+                    _surf_blit(
+                        spr.image,
+                        clip,
+                        (
+                            clip[0] + rect_offset_x,
+                            clip[1] + rect_offset_y,
+                            clip[2],
+                            clip[3],
+                        ),
+                        spr.blendmode,
+                    )
             else:  # dirty sprite
                 if spr.visible:
-                    _old_rect[spr] = _surf_blit(spr.image,
-                                                spr.rect,
-                                                spr.source_rect,
-                                                spr.blendmode)
+                    _old_rect[spr] = _surf_blit(
+                        spr.image, spr.rect, spr.source_rect, spr.blendmode
+                    )
                 if spr.dirty == 1:
                     spr.dirty = 0
 
     @staticmethod
-    def _find_dirty_area(_clip, _old_rect, _rect, _sprites, _update,
-                         _update_append, init_rect):
+    def _find_dirty_area(
+        _clip, _old_rect, _rect, _sprites, _update, _update_append, init_rect
+    ):
         for spr in _sprites:
             if spr.dirty > 0:
                 # chose the right rect
                 if spr.source_rect:
-                    _union_rect = _rect(spr.rect.topleft,
-                                        spr.source_rect.size)
+                    _union_rect = _rect(spr.rect.topleft, spr.source_rect.size)
                 else:
                     _union_rect = _rect(spr.rect)
 
@@ -1315,11 +1349,31 @@ class LayeredDirty(LayeredUpdates):
         Raises TypeError if time_ms is not int or float.
 
         """
+        warn(
+            "This function will be removed, use set_timing_threshold function instead",
+            DeprecationWarning,
+        )
+        self.set_timing_threshold(time_ms)
+
+    def set_timing_threshold(self, time_ms):
+        """set the threshold in milliseconds
+
+        set_timing_threshold(time_ms): return None
+
+        Defaults to 1000.0 / 80.0. This means that the screen will be painted
+        using the flip method rather than the update method if the update
+        method is taking so long to update the screen that the frame rate falls
+        below 80 frames per second.
+
+        Raises TypeError if time_ms is not int or float.
+
+        """
         if isinstance(time_ms, (int, float)):
             self._time_threshold = time_ms
         else:
-            raise TypeError("Expected numeric value, got {} instead".
-                            format(time_ms.__class__.__name__))
+            raise TypeError(
+                f"Expected numeric value, got {time_ms.__class__.__name__} instead"
+            )
 
 
 class GroupSingle(AbstractGroup):
@@ -1348,16 +1402,14 @@ class GroupSingle(AbstractGroup):
             return [self.__sprite]
         return []
 
-    def add_internal(self, sprite, _=None):
+    def add_internal(self, sprite, layer=None):
         if self.__sprite is not None:
             self.__sprite.remove_internal(self)
             self.remove_internal(self.__sprite)
         self.__sprite = sprite
 
-    def __nonzero__(self):
+    def __bool__(self):
         return self.__sprite is not None
-
-    __bool__ = __nonzero__
 
     def _get_sprite(self):
         return self.__sprite
@@ -1436,11 +1488,12 @@ class collide_rect_ratio:  # noqa pylint: disable=invalid-name; this is a functi
         """
         Turn the class into a string.
         """
+        # pylint: disable=consider-using-f-string
         return "<{klass} @{id:x} {attrs}>".format(
             klass=self.__class__.__name__,
             id=id(self) & 0xFFFFFF,
-            attrs=" ".join(
-                "{}={!r}".format(k, v) for k, v in self.__dict__.items()))
+            attrs=" ".join(f"{k}={v!r}" for k, v in self.__dict__.items()),
+        )
 
     def __call__(self, left, right):
         """detect collision between two sprites using scaled rects
@@ -1458,14 +1511,12 @@ class collide_rect_ratio:  # noqa pylint: disable=invalid-name; this is a functi
         leftrect = left.rect
         width = leftrect.width
         height = leftrect.height
-        leftrect = leftrect.inflate(width * ratio - width,
-                                    height * ratio - height)
+        leftrect = leftrect.inflate(width * ratio - width, height * ratio - height)
 
         rightrect = right.rect
         width = rightrect.width
         height = rightrect.height
-        rightrect = rightrect.inflate(width * ratio - width,
-                                      height * ratio - height)
+        rightrect = rightrect.inflate(width * ratio - width, height * ratio - height)
 
         return leftrect.colliderect(rightrect)
 
@@ -1489,16 +1540,15 @@ def collide_circle(left, right):
 
     xdistance = left.rect.centerx - right.rect.centerx
     ydistance = left.rect.centery - right.rect.centery
-    distancesquared = xdistance ** 2 + ydistance ** 2
+    distancesquared = xdistance**2 + ydistance**2
 
     try:
         leftradius = left.radius
     except AttributeError:
         leftrect = left.rect
         # approximating the radius of a square by using half of the diagonal,
-        # might give false positives (especially if its a long small rect)
-        leftradius = (0.5 * ((leftrect.width ** 2 +
-                              leftrect.height ** 2) ** 0.5))
+        # might give false positives (especially if it's a long small rect)
+        leftradius = 0.5 * ((leftrect.width**2 + leftrect.height**2) ** 0.5)
         # store the radius on the sprite for next time
         left.radius = leftradius
 
@@ -1507,15 +1557,14 @@ def collide_circle(left, right):
     except AttributeError:
         rightrect = right.rect
         # approximating the radius of a square by using half of the diagonal
-        # might give false positives (especially if its a long small rect)
-        rightradius = (0.5 * ((rightrect.width ** 2 +
-                               rightrect.height ** 2) ** 0.5))
+        # might give false positives (especially if it's a long small rect)
+        rightradius = 0.5 * ((rightrect.width**2 + rightrect.height**2) ** 0.5)
         # store the radius on the sprite for next time
         right.radius = rightradius
     return distancesquared <= (leftradius + rightradius) ** 2
 
 
-class collide_circle_ratio(object):  # noqa pylint: disable=invalid-name; this is a function-like class
+class collide_circle_ratio:  # noqa pylint: disable=invalid-name; this is a function-like class
     """detect collision between two sprites using scaled circles
 
     This callable class checks for collisions between two sprites using a
@@ -1543,11 +1592,12 @@ class collide_circle_ratio(object):  # noqa pylint: disable=invalid-name; this i
         """
         Turn the class into a string.
         """
+        # pylint: disable=consider-using-f-string
         return "<{klass} @{id:x} {attrs}>".format(
             klass=self.__class__.__name__,
             id=id(self) & 0xFFFFFF,
-            attrs=" ".join(
-                "{}={!r}".format(k, v) for k, v in self.__dict__.items()))
+            attrs=" ".join(f"{k}={v!r}" for k, v in self.__dict__.items()),
+        )
 
     def __call__(self, left, right):
         """detect collision between two sprites using scaled circles
@@ -1568,14 +1618,13 @@ class collide_circle_ratio(object):  # noqa pylint: disable=invalid-name; this i
         ratio = self.ratio
         xdistance = left.rect.centerx - right.rect.centerx
         ydistance = left.rect.centery - right.rect.centery
-        distancesquared = xdistance ** 2 + ydistance ** 2
+        distancesquared = xdistance**2 + ydistance**2
 
         try:
             leftradius = left.radius
         except AttributeError:
             leftrect = left.rect
-            leftradius = (0.5 * ((leftrect.width ** 2 +
-                                  leftrect.height ** 2) ** 0.5))
+            leftradius = 0.5 * ((leftrect.width**2 + leftrect.height**2) ** 0.5)
             # store the radius on the sprite for next time
             left.radius = leftradius
         leftradius *= ratio
@@ -1584,8 +1633,7 @@ class collide_circle_ratio(object):  # noqa pylint: disable=invalid-name; this i
             rightradius = right.radius
         except AttributeError:
             rightrect = right.rect
-            rightradius = (0.5 * ((rightrect.width ** 2 +
-                                   rightrect.height ** 2) ** 0.5))
+            rightradius = 0.5 * ((rightrect.width**2 + rightrect.height**2) ** 0.5)
             # store the radius on the sprite for next time
             right.radius = rightradius
         rightradius *= ratio
@@ -1645,12 +1693,11 @@ def spritecollide(sprite, group, dokill, collided=None):
     default_sprite_collide_func = sprite.rect.colliderect
 
     if dokill:
-
         crashed = []
         append = crashed.append
 
         for group_sprite in group.sprites():
-            if collided:
+            if collided is not None:
                 if collided(sprite, group_sprite):
                     group_sprite.kill()
                     append(group_sprite)
@@ -1661,14 +1708,16 @@ def spritecollide(sprite, group, dokill, collided=None):
 
         return crashed
 
-    if collided:
-        return [group_sprite
-                for group_sprite in group
-                if collided(sprite, group_sprite)]
+    if collided is not None:
+        return [
+            group_sprite for group_sprite in group if collided(sprite, group_sprite)
+        ]
 
-    return [group_sprite
-            for group_sprite in group
-            if default_sprite_collide_func(group_sprite.rect)]
+    return [
+        group_sprite
+        for group_sprite in group
+        if default_sprite_collide_func(group_sprite.rect)
+    ]
 
 
 def groupcollide(groupa, groupb, dokilla, dokillb, collided=None):
@@ -1695,15 +1744,13 @@ def groupcollide(groupa, groupb, dokilla, dokillb, collided=None):
     sprite_collide_func = spritecollide
     if dokilla:
         for group_a_sprite in groupa.sprites():
-            collision = sprite_collide_func(group_a_sprite, groupb,
-                                            dokillb, collided)
+            collision = sprite_collide_func(group_a_sprite, groupb, dokillb, collided)
             if collision:
                 crashed[group_a_sprite] = collision
                 group_a_sprite.kill()
     else:
         for group_a_sprite in groupa:
-            collision = sprite_collide_func(group_a_sprite, groupb,
-                                            dokillb, collided)
+            collision = sprite_collide_func(group_a_sprite, groupb, dokillb, collided)
             if collision:
                 crashed[group_a_sprite] = collision
     return crashed
@@ -1714,8 +1761,8 @@ def spritecollideany(sprite, group, collided=None):
 
     pygame.sprite.spritecollideany(sprite, group): return sprite
 
-    Given a sprite and a group of sprites, this will return return any single
-    sprite that collides with with the given sprite. If there are no
+    Given a sprite and a group of sprites, this will return any single
+    sprite that collides with the given sprite. If there are no
     collisions, then this returns None.
 
     If you don't need all the features of the spritecollide function, this

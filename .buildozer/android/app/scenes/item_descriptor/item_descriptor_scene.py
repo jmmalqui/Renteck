@@ -1,3 +1,5 @@
+import json
+import requests
 from mesa import *
 import pygame as pg
 
@@ -16,7 +18,6 @@ class Title(MesaTextLabel):
         self.set_text_color("black")
         self.set_text(text)
         self.set_background_color("white")
-        # self.border("black", 2)
         self.center_text()
         self.parent.add_element(self)
 
@@ -39,7 +40,7 @@ class PCname2(MesaTextLabel):
     def __init__(self, parent) -> None:
         super().__init__(parent)
         self.set_width_as_parent()
-        self.set_fixed_height(45)
+        self.set_fixed_height(125)
         self.declare_font_type("NOSYS")
         self.load_ttf("res/NotoSansJP-Regular.ttf")
         self.set_font_size(30)
@@ -52,8 +53,8 @@ class PCname2(MesaTextLabel):
 class PCtitle(MesaStackVertical):
     def __init__(self, parent) -> None:
         super().__init__(parent)
-        self.set_fixed_width(500)
-        self.set_fixed_height(100)
+        self.set_width_as_parent()
+        self.set_fixed_height(140)
         self.set_color_as_parent()
         self.set_background_color("#F3F3F3")
         self.pcname1 = PCname1(self)
@@ -82,7 +83,7 @@ class imagebox(MesaStackVertical):
     def __init__(self, parent, image) -> None:
         super().__init__(parent)
         self.set_fixed_width(370)
-        self.set_fixed_height(230)
+        self.set_fixed_height(330)
         self.set_background_color("#F3F3F3")
         self.image = pcImage(self, image)
         self.set_margin(35, 6)
@@ -285,10 +286,6 @@ class calendarTitle(MesaButtonText):
         self.set_margin(0, 10)
         self.center_text()
         self.parent.add_element(self)
-        self.set_signal(self.set_rental)
-
-    def set_rental(self):
-        self.move_to_screen("rental-set")
 
 
 class ItemDescriptorScene(MesaScene):
@@ -302,3 +299,47 @@ class ItemDescriptorScene(MesaScene):
         self.set_background_color("#E6E6E6")
         self.container.set_as_core()
         self.container.build()
+        self.core.eventsys.subscribe("ITEMSELECTED", lambda data: self.populate(data))
+        self.core.eventsys.subscribe("USERLOGIN", lambda data: self.get_user_id(data))
+        self.scroll.text3.set_signal(self.set_rental)
+        self.pcid = None
+        self.user_id = None
+        self.rentalnumber = None
+
+    def get_user_id(self, data):
+        self.user_id = data
+
+    def set_rental(self):
+        user = self.user_id
+        pcid = self.pcid
+        rental_number = self.rentalnumber
+        self.core.eventsys.emit("DATATRANSFER", [user, pcid, rental_number])
+        self.manager.go_to("rental-set")
+
+    def populate(self, data):
+        self.pcid = data[0]
+        self.scroll.image.image.set_image(data[1])
+        self.scroll.PCname.pcname1.set_text(data[2])
+        self.scroll.PCname.pcname2.set_text(data[3])
+        remaning = requests.request("GET", f"http://renteckdb.site/pcinfo/{data[0]}")
+        jsoninfo = json.loads(remaning.content)
+        daisu = jsoninfo["remaining"]
+        self.rentalnumber = daisu
+        self.scroll.text1.number.text = f"{daisu}"
+        self.scroll.text1.number.make_text_surface()
+        if daisu == 0:
+            self.scroll.text1.rentaru.text = "在庫切れ"
+            self.scroll.text1.rentaru.make_text_surface()
+            self.scroll.text3.set_signal(lambda: None)
+            self.scroll.text3.text = "レンタル不可能"
+            self.scroll.text3.text_color = "red"
+            self.scroll.text3.make_text_surface()
+        else:
+            self.scroll.text1.rentaru.text = "レンタル可能"
+            self.scroll.text1.rentaru.make_text_surface()
+            self.scroll.text3.set_signal(lambda: None)
+            self.scroll.text3.text = "レンタル期間選択"
+            self.scroll.text3.text_color = "black"
+            self.scroll.text3.make_text_surface()
+            self.scroll.text3.set_signal(self.set_rental)
+        self.scroll.image.image.resize_match_parent_width()

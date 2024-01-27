@@ -1,3 +1,4 @@
+from const import SceneTitles
 from mesa import *
 import pygame as pg
 
@@ -36,44 +37,49 @@ class modoru(MesaButtonText):
         self.set_signal(self.show_press)
 
     def show_press(self):
-        self.move_to_screen("item-list")
+        self.move_to_screen(SceneTitles.SceneRentalItemList)
 
 
 class mainTitle(MesaTextLabel):
     def __init__(self, parent) -> None:
         super().__init__(parent)
         self.set_fixed_width(128)
-        self.set_fixed_height(65)
+        self.set_fixed_height(45)
         self.declare_font_type("NOSYS")
         self.load_ttf("res/NotoSansJP-Medium.ttf")
         self.set_font_size(20)
         self.set_text_color("black")
         self.set_text("こんにちは、")
         self.set_color_as_parent()
-        self.set_margin(0, 13)
+        self.set_margin(0, 1)
         self.parent.add_element(self)
 
 
 class name(MesaTextLabel):
     def __init__(self, parent) -> None:
         super().__init__(parent)
-        self.set_fixed_width(200)
+        self.set_fixed_width(300)
         self.set_fixed_height(60)
         self.declare_font_type("NOSYS")
         self.load_ttf("res/NotoSansJP-Medium.ttf")
         self.set_font_size(33)
         self.set_text_color("black")
-        self.set_text("NAME")
+        self.set_text(f"something went wrong")
         self.set_color_as_parent()
         self.set_margin(0, 0)
         self.parent.add_element(self)
+        self.core.eventsys.subscribe("USERLOGIN", lambda data: self.update_text(data))
+
+    def update_text(self, data):
+        self.text = data[0]
+        self.make_text_surface()
 
 
-class titlebox(MesaStackHorizontal):
+class titlebox(MesaStackVertical):
     def __init__(self, parent) -> None:
         super().__init__(parent)
         self.set_width_as_parent()
-        self.set_fixed_height(60)
+        self.set_fixed_height(120)
         self.set_background_color("#F3F3F3")
         self.set_margin(7, 4)
         self.title = mainTitle(self)
@@ -174,7 +180,7 @@ class box1(MesaStackVertical):
     def __init__(self, parent) -> None:
         super().__init__(parent)
         self.set_fixed_width(370)
-        self.set_fixed_height(500)
+        self.set_fixed_height(600)
         self.set_background_color("#F3F3F3")
         self.set_margin(15, 20)
         self.title = titlebox(self)
@@ -187,6 +193,13 @@ class box1(MesaStackVertical):
         self.button = rentaruButton(self)
         self.button2 = logoutButton(self)
         self.parent.add_element(self)
+        self.core.eventsys.subscribe("USERLOGIN", lambda data: self.fillmail(data))
+
+    def fillmail(self, data):
+        self.text1.text2.text = data[0]
+        self.text2.text2.text = data[1]
+        self.text1.text2.make_text_surface()
+        self.text2.text2.make_text_surface()
 
 
 class Image(MesaImage):
@@ -233,7 +246,7 @@ class rentaruButton(MesaButtonText):
         self.set_signal(self.goto_rentalstate)
 
     def goto_rentalstate(self):
-        self.scene.manager.go_to("rentalstate")
+        self.scene.manager.go_to(SceneTitles.SceneRentalState)
 
 
 class logoutButton(MesaButtonText):
@@ -251,6 +264,10 @@ class logoutButton(MesaButtonText):
         self.center_vertical()
         self.set_margin(95, 30)
         self.parent.add_element(self)
+        self.set_signal(self.logout)
+
+    def logout(self):
+        self.move_to_screen(SceneTitles.SceneLogin)
 
 
 class MyPageEntryScene(MesaScene):

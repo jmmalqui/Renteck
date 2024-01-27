@@ -1,5 +1,5 @@
 %define name SDL2_image
-%define version 2.6.2
+%define version 2.6.3
 %define release 1
 
 Summary: Simple DirectMedia Layer - Sample Image Loading Library

@@ -5,6 +5,7 @@ from mesa.container.container import _MesaContainer
 from mesa.flag.core_flag import MesaCoreFlag
 from mesa.flag.render_flag import MesaRenderFlag
 import pygame as pg
+import plyer
 
 
 class MesaTextLabel(_MesaContainer):
@@ -26,9 +27,9 @@ class MesaTextLabel(_MesaContainer):
         self.text_offset = pg.Vector2(0, 0)
 
         pg.key.set_repeat(400, 50)
+        self.times = 0
 
     def declare_font_type(self, _type: str):
-        # This is subject to change, strings are considered bad practice.
         if _type == "SYS":
             self.font_type = "SYS"
         if _type == "NOSYS":
@@ -76,14 +77,15 @@ class MesaTextLabel(_MesaContainer):
 
     def set_font_size(self, font_size):
         if self.font_size == MesaCoreFlag.NOT_DECLARED_ON_INIT:
-            self.font_size = font_size
-        if self.font_size != MesaCoreFlag.NOT_DECLARED_ON_INIT:
+            self.font_size = int(font_size * self.core.ratio)
+        else:
             if font_size != self.font_size:
-                self.font_size = font_size
+                self.font_size = int(font_size * self.core.ratio)
                 if self.font_type == "SYS":
                     self.font = pg.font.SysFont(
                         self.font_name, self.font_size, self.bold, self.italic
                     )
+
                 elif self.font_type == "NOSYS":
                     self.font = pg.font.Font(
                         os.path.join(PATH, self.font_name), self.font_size
@@ -102,12 +104,17 @@ class MesaTextLabel(_MesaContainer):
                 self.make_text_surface()
 
     def make_text_surface(self):
-        self.text_surface = self.font.render(
-            self.text,
-            self.antialias,
-            self.text_color,
-            self.text_background_color,
-        )
+        self.times += 1
+        if self.text_color == MesaCoreFlag.NOT_DECLARED_ON_INIT:
+            self.text_color = "white"
+        if self.font != MesaCoreFlag.NOT_DECLARED_ON_INIT:
+            self.text_surface = self.font.render(
+                self.text,
+                self.antialias,
+                self.text_color,
+                self.text_background_color,
+                int(self.parent.width - 2 * self.marginx),
+            )
 
     def late_init(self):
         if self.font_type == "SYS":

@@ -1,10 +1,17 @@
 import os
 import pygame as pg
 from mesa.flag.core_flag import *
-
+from pygame import _sdl2 as sdl
 from mesa.info_tag.tag import InfoTagHandler
+from mesa.event import EventSystem
 
 os.environ["SDL_IME_SHOW_UI"] = "1"
+if "ANDROID_ARGUMENT" in os.environ:
+    from jnius import autoclass
+
+    PythonActivity = autoclass("org.kivy.android.PythonActivity")
+    Context = autoclass("android.content.Context")
+    InputMethodManager = autoclass("android.view.inputmethod.InputMethodManager")
 
 
 class MesaCore:
@@ -12,20 +19,48 @@ class MesaCore:
         from mesa.scene.scene_manager import MesaSceneManager
 
         pg.init()
+        self.ratio = 1
+        self.winfo = pg.display.Info()
+        if "ANDROID_ARGUMENT" in os.environ:
+            self.ANDROID = True
+        else:
+            self.ANDROID = False
+        self.eventsys = EventSystem()
         self.perform_late_init = True
-        self.display = MesaCoreFlag.NOT_DECLARED_ON_INIT
-        self.clock = MesaCoreFlag.NOT_DECLARED_ON_INIT
-        self.clock_type = MesaCoreFlag.NOT_DECLARED_ON_INIT
-        self.clock_fps = MesaCoreFlag.NOT_DECLARED_ON_INIT
-        self.rendering_flags = MesaCoreFlag.NOT_DECLARED_ON_INIT
-        self.bacgkround_color = MesaCoreFlag.NOT_DECLARED_ON_INIT
-        self.delta_time = MesaCoreFlag.NOT_DECLARED_ON_INIT
-        self.caption = MesaCoreFlag.NOT_DECLARED_ON_INIT
-
+        self.display = None
+        self.clock = None
+        self.clock_type = None
+        self.clock_fps = None
+        self.rendering_flags = None
+        self.bacgkround_color = None
+        self.delta_time = None
+        self.caption = None
         self.info_tag = InfoTagHandler(self)
         self.scene_manager = MesaSceneManager(self)
         self.on_debug = False
         self.mouse_rel = [0, 0]
+
+    def get_window_token(self):
+        context = PythonActivity.mActivity
+
+        view = context.getCurrentFocus()
+
+        if view:
+            window_token = view.getWindowToken()
+            return window_token
+        else:
+            return None
+
+    def hide_keyboard(self):
+        if self.ANDROID:
+            context = PythonActivity.mActivity
+
+            input_manager = context.getSystemService(Context.INPUT_METHOD_SERVICE)
+
+            window_token = self.get_window_token()
+
+            if window_token:
+                input_manager.hideSoftInputFromWindow(window_token, 0)
 
     def set_application_name(self, title):
         self.caption = title
@@ -45,26 +80,37 @@ class MesaCore:
         self.clock_fps = fps
 
     def set_display_size(self, height, width):
-        if self.rendering_flags == MesaCoreFlag.NOT_DECLARED_ON_INIT:
+        if self.rendering_flags == None:
             self.rendering_flags = 0
-            self.display = pg.display.set_mode(
-                [height, width], flags=self.rendering_flags
-            )
+            if not self.ANDROID:
+                self.display = pg.display.set_mode(
+                    [height, width], flags=self.rendering_flags
+                )
+
+            else:
+                self.display = pg.display.set_mode(
+                    [height * 1.5, width * 1.5],
+                    pg.SCALED | pg.DOUBLEBUF,
+                )
+                self.ratio = 1.5
+
         else:
             flag = self.rendering_flags[0]
             for f in self.rendering_flags[0:]:
                 flag |= f
-            self.display = pg.display.set_mode([height, width], flag)
+            if not self.ANDROID:
+                self.display = pg.display.set_mode([height, width], flag)
+            else:
+                self.display = pg.display.set_mode(
+                    [height * 1.5, width * 1.5],
+                    pg.SCALED | pg.DOUBLEBUF,
+                )
+                self.ratio = 1.5
 
     def late_init(self):
-        if self.display == MesaCoreFlag.NOT_DECLARED_ON_INIT:
-            raise ValueError(
-                "Display was not initialized, perhaps you forgot set_display_size() ?"
-            )
-
-        if self.clock == MesaCoreFlag.NOT_DECLARED_ON_INIT:
+        if self.clock == None:
             self.set_clock(60)
-        if self.bacgkround_color == MesaCoreFlag.NOT_DECLARED_ON_INIT:
+        if self.bacgkround_color == None:
             self.bacgkround_color = "black"
 
     def check_events(self):
@@ -89,23 +135,21 @@ class MesaCore:
 
     def __coreupdate__(self):
         self.mouse_rel = pg.mouse.get_rel()
-
+        self.info_tag.update()
         if self.perform_late_init:
             self.late_init()
             self.perform_late_init = not self.perform_late_init
 
         self.scene_manager.update()
-        # self.info_tag.update()
 
     def render(self):
         ...
 
     def __corerender__(self):
-        # self.display.fill(self.bacgkround_color)
         self.scene_manager.render()
-        self.info_tag.render()
         self.render()
-        pg.display.flip()
+        self.info_tag.render()
+        pg.display.update()
 
     def update_dt(self):
         if self.clock_type == MesaCoreFlag.NON_TICK_BUSY_CLOCK:

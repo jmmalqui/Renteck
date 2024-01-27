@@ -5,7 +5,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 # See docs/release_checklist.md
 set(MAJOR_VERSION 2)
 set(MINOR_VERSION 6)
-set(MICRO_VERSION 2)
+set(MICRO_VERSION 3)
 set(SDL_REQUIRED_VERSION 2.0.9)
 
 # For historical reasons this is 3.0.0 rather than the expected 1.0.0
@@ -485,7 +485,7 @@ if(SDL2IMAGE_PNG)
             message(STATUS "${PROJECT_NAME}: Using vendored libpng")
             sdl_check_project_in_subfolder(external/libpng libpng SDL2IMAGE_VENDORED)
             add_subdirectory(external/libpng EXCLUDE_FROM_ALL)
-            if(SDL2IMAGE_BUILD_SHARED_LIBS)
+            if(SDL2IMAGE_PNG_SHARED)
                 set(PNG_LIBRARY png)
             else()
                 set(PNG_LIBRARY png_static)

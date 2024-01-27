@@ -1,6 +1,8 @@
 from mesa import *
 import pygame as pg
 
+from mesa.info_tag.tag import InfoTagLevels
+
 sentence1 = "※仮登録の際に入力したメールアドレスを入力してください"
 
 
@@ -8,6 +10,7 @@ class RealRegistration(MesaScene):
     def __init__(self, core, scene_name, manager) -> None:
         super().__init__(core, scene_name, manager)
         self.set_background_color("#F6F6F6")
+        self.preregistered_email = ""
         self.container = MesaStackVertical(self)
         self.title1 = Title1(self.container, "会員本登録")  # 上部ラベル
         self.text0 = CustomText0(self.container, "お客様情報を入力してください", 50)
@@ -15,8 +18,73 @@ class RealRegistration(MesaScene):
         self.box2 = box2(self.container)
         self.box3 = box3(self.container)
         self.MyButton2 = MyButton2(self.container, "確認画面へ", "white", "black")
+        self.MyButton2.set_signal(self.end_login)
         self.container.set_as_core()
         self.container.build()
+        self.core.eventsys.subscribe(
+            "EMAILREGISTERED", lambda data: self.check_if_email_valid(data)
+        )
+
+    def check_if_email_valid(self, data):
+        self.preregistered_email = data
+
+    def end_login(self):
+        if self.box1.input1.get_written_text() != self.preregistered_email:
+            self.core.info_tag.inform(
+                f"仮登録の際に入力したメールアドレスを入力してください:   {self.preregistered_email}",
+                InfoTagLevels.CRITICAL,
+            )
+            self.box1.input1.border("red", 2)
+        else:
+            self.box1.input1.border("#818181", 2)
+        if len(self.box2.input2.get_written_text()) > 10:
+            self.core.info_tag.inform(
+                f"ニックネームを10文字以内にしてください",
+                InfoTagLevels.CRITICAL,
+            )
+            self.box2.input2.border("red", 2)
+        else:
+            self.box2.input2.border("#818181", 2)
+        if (
+            len(self.box3.input3.get_written_text()) < 7
+            or len(self.box3.input3.get_written_text()) > 20
+        ):
+            self.core.info_tag.inform(
+                f"パスワードを半角英数字で７～２０文字にしてください",
+                InfoTagLevels.CRITICAL,
+            )
+            self.box3.input3.border("red", 2)
+        else:
+            self.box3.input3.border("#818181", 2)
+        if (
+            len(self.box3.input3.get_written_text()) == 0
+            and len(self.box2.input2.get_written_text()) == 0
+        ):
+            self.core.info_tag.inform(
+                f"パスワードとニックネームを入力してください",
+                InfoTagLevels.CRITICAL,
+            )
+
+        if (
+            self.box1.input1.get_written_text() == self.preregistered_email
+            and len(self.box3.input3.get_written_text()) != 0
+            and len(self.box2.input2.get_written_text()) <= 10
+            and len(self.box2.input2.get_written_text()) > 0
+            and (
+                len(self.box3.input3.get_written_text()) > 7
+                and len(self.box3.input3.get_written_text()) < 20
+            )
+        ):
+            self.core.info_tag.inform(f"確認してください", InfoTagLevels.ALERT)
+            self.manager.go_to("userinfoconfirm", False)
+            self.core.eventsys.emit(
+                "HONTOUROKUDONE",
+                [
+                    self.box1.input1.get_written_text(),
+                    self.box2.input2.get_written_text(),
+                    self.box3.input3.get_written_text(),
+                ],
+            )
 
 
 # ラベル（上部）
@@ -267,6 +335,7 @@ class CustomText3b(MesaTextLabel):
 class MyInputBox3(MesaTextBoxInput):
     def __init__(self, parent, height) -> None:
         super().__init__(parent)
+        self.password()
         self.set_fixed_height(height)
         self.set_width_as_parent()
         self.set_margin(0, 0)
@@ -336,7 +405,3 @@ class MyButton2(MesaButtonText):
         self.set_background_color(bgcolor)
         self.center_text()
         self.parent.add_element(self)
-        self.set_signal(self.show_press)
-
-    def show_press(self):
-        self.move_to_screen("userinfoconfirm", False)

@@ -5,7 +5,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 # See docs/release_checklist.md
 set(MAJOR_VERSION 2)
 set(MINOR_VERSION 20)
-set(MICRO_VERSION 1)
+set(MICRO_VERSION 2)
 set(SDL_REQUIRED_VERSION 2.0.10)
 
 # For historical reasons this is 15.0.0 rather than the expected 1.0.0
@@ -348,8 +348,9 @@ if(SDL2TTF_INSTALL)
         endif()
         # Only install a SDL2_ttf.pc file in Release mode
         install(CODE "
-        file(COPY_FILE \"${CMAKE_CURRENT_BINARY_DIR}/SDL2_ttf-$<CONFIG>.pc\"
-            \"${CMAKE_CURRENT_BINARY_DIR}/SDL2_ttf.pc\" ONLY_IF_DIFFERENT)
+        # FIXME: use file(COPY_FILE) if CMake 3.21+
+        execute_process(COMMAND \"${CMAKE_COMMAND}\" -E copy \"${CMAKE_CURRENT_BINARY_DIR}/SDL2_ttf-$<CONFIG>.pc\"
+            \"${CMAKE_CURRENT_BINARY_DIR}/SDL2_ttf.pc\")
         file(INSTALL DESTINATION \"\${CMAKE_INSTALL_PREFIX}/${PC_DESTDIR}\"
             TYPE FILE
             FILES \"${CMAKE_CURRENT_BINARY_DIR}/SDL2_ttf.pc\")" CONFIG Release)
@@ -401,6 +402,9 @@ endif()
 add_library(SDL2::ttf INTERFACE IMPORTED GLOBAL)
 set_target_properties(SDL2::ttf PROPERTIES
     INTERFACE_LINK_LIBRARIES "SDL2_ttf"
-    DEPRECATION "Use SDL2_ttf::SDL2_ttf or SDL2_ttf::SDL2_ttf-static instead"
 )
-
+if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.17")
+    set_target_properties(SDL2::ttf PROPERTIES
+        DEPRECATION "Use SDL2_ttf::SDL2_ttf or SDL2_ttf::SDL2_ttf-static instead"
+    )
+endif()
